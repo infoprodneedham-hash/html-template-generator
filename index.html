@@ -2540,5 +2540,565 @@
       executePreviewCompilation();
     };
   </script>
+  <!-- ========================================================
+     WEBFORGE ADD-ON: BOTTOM AFFILIATE DRAWER & RIGHT SOCIAL SHARE
+     Paste directly before the closing </body> tag
+======================================================== -->
+
+<!-- 1. COMPONENT STYLES -->
+<style>
+  /* --- Shared Widget Reset & Scoping --- */
+  .wf-addon-reset * {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  /* --- 1. RIGHT SOCIAL SHARE DRAWER --- */
+  .wf-share-drawer-wrapper {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Closed state: tucks panel off-screen */
+  .wf-share-drawer-wrapper:not(.is-open) {
+    transform: translateY(-50%) translateX(240px);
+  }
+
+  /* Floating Launch Tab */
+  .wf-share-toggle-tab {
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    border-right: none;
+    padding: 10px 12px;
+    border-radius: 12px 0 0 12px;
+    cursor: pointer;
+    box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: background-color 0.2s, transform 0.2s;
+    user-select: none;
+  }
+
+  .wf-share-toggle-tab:hover {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+
+  .wf-share-toggle-tab span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Slide-Out Body Panel */
+  .wf-share-panel {
+    width: 240px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-right: none;
+    border-radius: 16px 0 0 16px;
+    padding: 18px 16px;
+    box-shadow: -8px 12px 35px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .wf-share-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 10px;
+  }
+
+  .wf-share-header h4 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: -0.01em;
+  }
+
+  .wf-share-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    border-radius: 4px;
+    line-height: 1;
+  }
+
+  .wf-share-close:hover {
+    color: #f8fafc;
+    background: #1e293b;
+  }
+
+  .wf-share-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .wf-share-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #f8fafc;
+    transition: filter 0.15s, transform 0.1s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .wf-share-btn:hover {
+    filter: brightness(1.15);
+    transform: translateX(-2px);
+  }
+
+  .wf-share-btn svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  .wf-bg-x        { background: #000000; border: 1px solid #27272a; }
+  .wf-bg-fb       { background: #1877f2; }
+  .wf-bg-linkedin { background: #0a66c2; }
+  .wf-bg-wa       { background: #25d366; color: #064e3b; }
+  .wf-bg-copy     { background: #334155; color: #f8fafc; }
+
+  /* --- 2. BOTTOM AFFILIATE DRAWER --- */
+  .wf-affiliate-drawer-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 980px;
+    z-index: 9997;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Closed state: hide drawer beneath viewport */
+  .wf-affiliate-drawer-wrapper:not(.is-open) {
+    transform: translateX(-50%) translateY(calc(100% - 38px));
+  }
+
+  /* Trigger Tab */
+  .wf-affiliate-tab-bar {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 1px;
+  }
+
+  .wf-affiliate-tab-btn {
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    border-bottom: none;
+    padding: 7px 22px;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+  }
+
+  .wf-affiliate-tab-btn:hover {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+
+  .wf-affiliate-tab-btn svg {
+    width: 13px;
+    height: 13px;
+    transition: transform 0.3s;
+  }
+
+  .wf-affiliate-drawer-wrapper.is-open .wf-affiliate-tab-btn svg {
+    transform: rotate(180deg);
+  }
+
+  /* Main Bottom Drawer Body */
+  .wf-affiliate-body {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-bottom: none;
+    border-radius: 18px 18px 0 0;
+    padding: 18px 24px 20px;
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(16px);
+  }
+
+  .wf-affiliate-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 10px;
+  }
+
+  .wf-affiliate-title-group h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .wf-affiliate-title-group p {
+    margin: 3px 0 0;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+
+  .wf-affiliate-badge {
+    background: #0369a1;
+    color: #e0f2fe;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Grid Cards */
+  .wf-affiliate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .wf-affiliate-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .wf-affiliate-card:hover {
+    transform: translateY(-2px);
+    border-color: #38bdf8;
+  }
+
+  .wf-aff-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .wf-aff-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0 0 2px 0;
+  }
+
+  .wf-aff-card-desc {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .wf-aff-tag {
+    font-size: 10px;
+    background: #15803d;
+    color: #dcfce7;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .wf-aff-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: #0284c7;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .wf-aff-btn:hover {
+    background: #0369a1;
+  }
+
+  .wf-aff-footer-note {
+    font-size: 10px;
+    color: #64748b;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* Responsive tweak */
+  @media (max-width: 640px) {
+    .wf-affiliate-drawer-wrapper {
+      max-width: 100%;
+    }
+    .wf-affiliate-body {
+      padding: 14px 14px 16px;
+    }
+    .wf-affiliate-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<!-- 2. COMPONENT DOM -->
+<div class="wf-addon-reset">
+
+  <!-- A. RIGHT-SIDE SOCIAL SHARE DRAWER -->
+  <aside id="wfShareDrawer" class="wf-share-drawer-wrapper is-open" aria-label="Social Share Drawer">
+    <!-- Toggle tab always visible -->
+    <button class="wf-share-toggle-tab" id="wfShareToggleBtn" title="Toggle Share Drawer" aria-expanded="true">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </svg>
+      <span>Share</span>
+    </button>
+
+    <!-- Slide-out links panel -->
+    <div class="wf-share-panel">
+      <div class="wf-share-header">
+        <h4>Share Page</h4>
+        <button class="wf-share-close" id="wfShareCloseBtn" aria-label="Close Share Panel">&times;</button>
+      </div>
+
+      <div class="wf-share-links">
+        <!-- X (Twitter) -->
+        <a href="#" class="wf-share-btn wf-bg-x" id="wfShareX" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="#" class="wf-share-btn wf-bg-linkedin" id="wfShareLinkedin" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46v-8.37M7.86 6.55a1.62 1.62 0 1 0 0 3.24 1.62 1.62 0 0 0 0-3.24z"/></svg>
+          LinkedIn
+        </a>
+
+        <!-- Facebook -->
+        <a href="#" class="wf-share-btn wf-bg-fb" id="wfShareFB" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+
+        <!-- WhatsApp -->
+        <a href="#" class="wf-share-btn wf-bg-wa" id="wfShareWA" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          WhatsApp
+        </a>
+
+        <!-- Copy Direct Link -->
+        <button class="wf-share-btn wf-bg-copy" id="wfCopyLinkBtn">
+          <svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>
+          <span id="wfCopyLabel">Copy Link</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- B. BOTTOM SLIDE-OUT AFFILIATES DRAWER -->
+  <aside id="wfAffiliateDrawer" class="wf-affiliate-drawer-wrapper is-open" aria-label="Affiliate Partner Drawer">
+    <!-- Toggle Tab -->
+    <div class="wf-affiliate-tab-bar">
+      <button class="wf-affiliate-tab-btn" id="wfAffiliateToggleBtn" aria-expanded="true">
+        <span>Recommended Developer Tools & Hosting</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Content -->
+    <div class="wf-affiliate-body">
+      <div class="wf-affiliate-topbar">
+        <div class="wf-affiliate-title-group">
+          <h3>
+            Curated Creator & Developer Deals
+            <span class="wf-affiliate-badge">Verified Partners</span>
+          </h3>
+          <p>Hand-picked tools to host, deploy, and scale your website templates.</p>
+        </div>
+        <button class="wf-share-close" id="wfAffiliateCloseX" aria-label="Minimize Affiliate Drawer">&times;</button>
+      </div>
+
+      <!-- Affiliate Partner Cards Grid -->
+      <div class="wf-affiliate-grid">
+        <!-- Partner 1 -->
+        <div class="wf-affiliate-card">
+          <div>
+            <div class="wf-aff-card-header">
+              <h4 class="wf-aff-card-title">Cloud Deployment & Hosting</h4>
+              <span class="wf-aff-tag">Save 75%</span>
+            </div>
+            <p class="wf-aff-card-desc">High-speed global edge network with free SSL, custom domains, and zero-downtime deployment.</p>
+          </div>
+          <a href="https://example.com/affiliate-hosting" target="_blank" rel="noopener sponsored" class="wf-aff-btn">
+            Claim Offer &rarr;
+          </a>
+        </div>
+
+        <!-- Partner 2 -->
+        <div class="wf-affiliate-card">
+          <div>
+            <div class="wf-aff-card-header">
+              <h4 class="wf-aff-card-title">Domains & DNS Engine</h4>
+              <span class="wf-aff-tag">$0.99 / Year</span>
+            </div>
+            <p class="wf-aff-card-desc">Register .com, .app, and .io extensions with free WHOIS privacy and automated record routing.</p>
+          </div>
+          <a href="https://example.com/affiliate-domains" target="_blank" rel="noopener sponsored" class="wf-aff-btn">
+            Find Domain &rarr;
+          </a>
+        </div>
+
+        <!-- Partner 3 -->
+        <div class="wf-affiliate-card">
+          <div>
+            <div class="wf-aff-card-header">
+              <h4 class="wf-aff-card-title">Vector UI & Icon Assets</h4>
+              <span class="wf-aff-tag">Free Trial</span>
+            </div>
+            <p class="wf-aff-card-desc">Access 100,000+ commercial-use SVG icons, illustration kits, and modern web wireframe kits.</p>
+          </div>
+          <a href="https://example.com/affiliate-assets" target="_blank" rel="noopener sponsored" class="wf-aff-btn">
+            Get Assets &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="wf-affiliate-footer-note">
+        Disclosure: Some recommendations above contain affiliate links. If you make a purchase, we may earn a modest commission at no extra cost to you.
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- 3. COMPONENT INTERACTION CONTROLLER -->
+<script>
+  (function () {
+    // Current URL and Page Title for Dynamic Social Sharing
+    const currentUrl = encodeURIComponent(window.location.href);
+    const pageTitle  = encodeURIComponent(document.title || 'Check out this website template builder!');
+
+    // Hook up Social URLs
+    const shareX = document.getElementById('wfShareX');
+    if (shareX) shareX.href = `https://twitter.com/intent/tweet?url=${currentUrl}&text=${pageTitle}`;
+
+    const shareLinkedin = document.getElementById('wfShareLinkedin');
+    if (shareLinkedin) shareLinkedin.href = `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+
+    const shareFB = document.getElementById('wfShareFB');
+    if (shareFB) shareFB.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+
+    const shareWA = document.getElementById('wfShareWA');
+    if (shareWA) shareWA.href = `https://api.whatsapp.com/send?text=${pageTitle}%20${currentUrl}`;
+
+    // Clipboard Copy Handler
+    const copyBtn = document.getElementById('wfCopyLinkBtn');
+    const copyLabel = document.getElementById('wfCopyLabel');
+    if (copyBtn && copyLabel) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          copyLabel.textContent = 'Link Copied!';
+          setTimeout(() => { copyLabel.textContent = 'Copy Link'; }, 2000);
+        } catch (err) {
+          copyLabel.textContent = 'Failed to copy';
+        }
+      });
+    }
+
+    // Right Social Share Drawer Toggle Controls
+    const shareDrawer = document.getElementById('wfShareDrawer');
+    const shareToggleBtn = document.getElementById('wfShareToggleBtn');
+    const shareCloseBtn = document.getElementById('wfShareCloseBtn');
+
+    if (shareToggleBtn && shareDrawer) {
+      shareToggleBtn.addEventListener('click', () => {
+        const isOpen = shareDrawer.classList.toggle('is-open');
+        shareToggleBtn.setAttribute('aria-expanded', isOpen);
+      });
+    }
+
+    if (shareCloseBtn && shareDrawer) {
+      shareCloseBtn.addEventListener('click', () => {
+        shareDrawer.classList.remove('is-open');
+        if (shareToggleBtn) shareToggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    // Bottom Affiliate Drawer Toggle Controls
+    const affiliateDrawer = document.getElementById('wfAffiliateDrawer');
+    const affiliateToggleBtn = document.getElementById('wfAffiliateToggleBtn');
+    const affiliateCloseX = document.getElementById('wfAffiliateCloseX');
+
+    function toggleAffiliate(forceState) {
+      if (!affiliateDrawer) return;
+      const willOpen = forceState !== undefined ? forceState : !affiliateDrawer.classList.contains('is-open');
+      affiliateDrawer.classList.toggle('is-open', willOpen);
+      if (affiliateToggleBtn) affiliateToggleBtn.setAttribute('aria-expanded', willOpen);
+    }
+
+    if (affiliateToggleBtn) {
+      affiliateToggleBtn.addEventListener('click', () => toggleAffiliate());
+    }
+
+    if (affiliateCloseX) {
+      affiliateCloseX.addEventListener('click', () => toggleAffiliate(false));
+    }
+  })();
+</script>
 </body>
 </html>
