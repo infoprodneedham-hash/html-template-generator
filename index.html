@@ -1,0 +1,2544 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebForge Studio Pro - Rapid Website Template Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.7); }
+    ::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.4); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.6); }
+    .custom-range { accent-color: #6366f1; }
+    .preview-frame-transition { transition: width 0.28s cubic-bezier(0.4, 0, 0.2, 1); }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans overflow-hidden antialiased select-none">
+
+  <div id="welcomeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 transition-opacity duration-300">
+    <div class="relative w-full max-w-2xl bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      <div class="bg-gradient-to-r from-indigo-950 via-slate-900 to-slate-900 p-6 border-b border-slate-800 flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="text-xl font-bold text-white tracking-tight">WebForge Studio Pro</h2>
+              <span class="text-[10px] font-semibold bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full border border-indigo-500/30">v3.0 Dynamic</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Rapid Prototyping & Static Site Synthesis for Junior Developers & Designers</p>
+          </div>
+        </div>
+        <button id="closeWelcomeTopBtn" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-4 text-xs text-slate-300 leading-relaxed">
+        <div class="bg-indigo-950/40 border border-indigo-500/30 rounded-xl p-4 flex gap-3 text-indigo-200">
+          <svg class="w-5 h-5 text-indigo-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>This workspace generates production-ready, fully responsive static HTML/CSS templates. Modify any knob on the left, and watch the sandbox update reactively in real time.</span>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="font-semibold text-white text-sm">Key Upgrades in this Release:</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300">
+            <li class="p-2 rounded-lg bg-slate-800/60 border border-slate-700/60 flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span> 12 Curated Industries & Content Profiles
+            </li>
+            <li class="p-2 rounded-lg bg-slate-800/60 border border-slate-700/60 flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span> 7 Distinct Archetypes (Neo-Brutalism, B&W, SaaS, etc.)
+            </li>
+            <li class="p-2 rounded-lg bg-slate-800/60 border border-slate-700/60 flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span> Real-Time Reactive State-to-DOM Compiler
+            </li>
+            <li class="p-2 rounded-lg bg-slate-800/60 border border-slate-700/60 flex items-center gap-2">
+              <span class="text-emerald-400 font-bold">✓</span> Export Standalone Zero-Dependency HTML
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-t border-slate-800 pt-3">
+          <h4 class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">Educational Usage & License</h4>
+          <p class="text-[11px] text-slate-400">
+            WebForge Studio Pro does not depend on a server or external database. All generated files are self-contained and suitable for personal portfolios, student assignments, client wireframes, or direct static hosting on GitHub Pages and Netlify.
+          </p>
+        </div>
+
+        <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700 flex items-center justify-between">
+          <span class="text-slate-300">Need mentoring or template guidance?</span>
+          <a href="mailto:support@webforgepro.dev" class="text-indigo-400 hover:text-indigo-300 font-medium underline flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            support@webforgepro.dev
+          </a>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/90 px-6 py-4 border-t border-slate-800 flex justify-between items-center">
+        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+          <input type="checkbox" id="dontShowAgainCheck" class="rounded bg-slate-800 border-slate-600 text-indigo-600 focus:ring-0">
+          <span>Remember my choice (suppress on next visit)</span>
+        </label>
+        <button id="launchStudioBtn" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs rounded-xl shadow-lg shadow-indigo-600/30 transition transform active:scale-95 flex items-center gap-2">
+          <span>Enter Studio Workspace</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <header class="h-14 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between shrink-0 z-30">
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center font-bold text-white shadow-md shadow-indigo-600/30">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+        </div>
+        <div>
+          <span class="font-bold tracking-tight text-white text-sm flex items-center gap-1.5">
+            WebForge <span class="text-indigo-400 font-mono text-[11px] font-semibold bg-indigo-950/80 px-1.5 py-0.5 rounded border border-indigo-500/30">PRO</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="h-4 w-px bg-slate-800 hidden sm:block"></div>
+
+      <!-- Quick Archetype Select -->
+      <div class="flex items-center gap-2">
+        <label for="industrySelect" class="text-xs text-slate-400 hidden lg:inline">Niche Preset:</label>
+        <select id="industrySelect" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-indigo-500 cursor-pointer font-medium">
+          <option value="photo_studio">Photography & Visual Arts Studio</option>
+          <option value="architecture">Architecture & Interior Design</option>
+          <option value="bakery_cafe">Artisanal Bakery & Specialty Coffee</option>
+          <option value="saas_startup">Modern Tech & AI SaaS Platform</option>
+          <option value="law_firm">Law Firm & Strategic Legal Counsel</option>
+          <option value="fitness_club">Fitness Club & High-Intensity Conditioning</option>
+          <option value="wellness_spa">Wellness, Yoga & Spa Sanctuary</option>
+          <option value="trade_craft">Landscape, Timber & Artisan Trade</option>
+          <option value="bookshop">Independent Bookshop & Literary Press</option>
+          <option value="boutique_hotel">Boutique Villa & Coastal Bed & Breakfast</option>
+          <option value="design_agency">Creative Brand & Digital Agency</option>
+          <option value="medical_clinic">Medical, Dental & Wellness Clinic</option>
+        </select>
+        <button id="applyPresetDefaultsBtn" title="Load curated styles for this industry" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-indigo-300 text-xs rounded-lg font-medium transition flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          <span class="hidden sm:inline">Apply Niche Defaults</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Center Viewport Resizers -->
+    <div class="hidden md:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 shadow-inner">
+      <button data-view="desktop" class="viewport-btn px-3 py-1 text-xs rounded-lg font-medium transition text-white bg-slate-800 flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+        <span>Desktop</span>
+      </button>
+      <button data-view="tablet" class="viewport-btn px-3 py-1 text-xs rounded-lg font-medium transition text-slate-400 hover:text-slate-200 flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+        <span>Tablet</span>
+      </button>
+      <button data-view="mobile" class="viewport-btn px-3 py-1 text-xs rounded-lg font-medium transition text-slate-400 hover:text-slate-200 flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+        <span>Mobile</span>
+      </button>
+    </div>
+
+    <!-- Actions, Slots and Export -->
+    <div class="flex items-center gap-2">
+      <!-- Save Slots -->
+      <div class="flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl border border-slate-700/60">
+        <select id="saveSlotSelect" class="bg-transparent text-xs text-slate-300 font-medium px-1.5 py-1 outline-none cursor-pointer">
+          <option value="slot_1">Slot 1</option>
+          <option value="slot_2">Slot 2</option>
+          <option value="slot_3">Slot 3</option>
+          <option value="slot_4">Slot 4</option>
+          <option value="slot_5">Slot 5</option>
+        </select>
+        <button id="saveSlotBtn" title="Save configuration to chosen slot" class="p-1.5 rounded-lg hover:bg-slate-700 text-slate-300 hover:text-emerald-400 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+        </button>
+        <button id="loadSlotBtn" title="Load configuration from chosen slot" class="p-1.5 rounded-lg hover:bg-slate-700 text-slate-300 hover:text-indigo-400 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+        </button>
+      </div>
+
+      <!-- Copy & Download -->
+      <button id="copyCodeBtn" title="Copy standalone HTML code to clipboard" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium transition active:scale-95">
+        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+        <span>Copy HTML</span>
+      </button>
+
+      <button id="exportFileBtn" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md shadow-indigo-600/30 transition transform active:scale-95">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+        <span>Download .HTML</span>
+      </button>
+
+      <button id="reopenHelpBtn" title="Help & Disclaimer" class="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-1 flex overflow-hidden">
+    <!-- LEFT CONFIGURATION SIDEBAR -->
+    <aside id="sidebar" class="w-96 min-w-[340px] max-w-[430px] bg-slate-900 border-r border-slate-800 flex flex-col h-full shrink-0">
+      <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-900/60 backdrop-blur">
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+          Design & Layout Matrix
+        </span>
+        <button id="randomizeAllBtn" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium flex items-center gap-1 hover:underline">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          Randomize
+        </button>
+      </div>
+
+      <!-- Controls Accordion Form -->
+      <div class="flex-1 overflow-y-auto p-4 space-y-3.5 text-xs text-slate-300 select-text">
+
+        <!-- Accordion 1: Archetype & Template Flavor -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+              Aesthetic Style Archetype
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Visual Design Archetype</label>
+              <select id="templateStyle" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="minimalist_clean">Minimalist Clean & Grid</option>
+                <option value="neo_brutalist">Neo-Brutalist & High Impact</option>
+                <option value="elegant_editorial">Editorial Serif & Fine Luxury</option>
+                <option value="modern_glass">Modern Glassmorphism & SaaS Glow</option>
+                <option value="warm_rustic">Warm Rustic & Organic Earth</option>
+                <option value="monochrome_noir">High-Contrast Monochromatic B&W</option>
+                <option value="vibrant_pop">Vibrant Pop & Creative Punch</option>
+              </select>
+              <p class="text-[10px] text-slate-500 mt-1">Changes card borders, drop shadows, button aesthetics, and surface treatments.</p>
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Layout Density & Spacing</label>
+              <select id="layoutDensity" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="spacious">Spacious (Editorial breathability)</option>
+                <option value="comfortable" selected>Comfortable (Balanced)</option>
+                <option value="compact">Compact (High information density)</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 2: Brand Identity & Copy -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+              Brand Identity & Messaging
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Brand / Business Name</label>
+              <input type="text" id="brandName" value="Aura Noir Studio" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Tagline / Mission</label>
+              <input type="text" id="brandTagline" value="Monochrome fine art photography and timeless editorial curation" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Hero Main Headline</label>
+              <input type="text" id="heroHeadline" value="Capturing light, shadow, and unscripted emotion." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Hero Narrative Subtext</label>
+              <textarea id="heroSubtext" rows="2" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">We craft emotive black & white monographs, portraiture, and architectural installations for galleries and private collectors worldwide.</textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Primary CTA</label>
+                <input type="text" id="heroPrimaryBtn" value="View Selected Work" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-slate-100 text-xs">
+              </div>
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Secondary CTA</label>
+                <input type="text" id="heroSecondaryBtn" value="Read The Journal" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-slate-100 text-xs">
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 3: Color Palette & Tone -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-pink-500"></span>
+              Color Chemistry & Theme Mode
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Harmonic Color Scheme</label>
+              <select id="colorSchemePreset" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="monochrome">Monochrome Minimalist (B&W High Contrast)</option>
+                <option value="nordic_slate">Nordic Slate & Arctic Cyan</option>
+                <option value="terracotta_dune">Warm Terracotta & Sandstone</option>
+                <option value="cyber_violet">Cyber Violet & Neon Fuchsia</option>
+                <option value="emerald_sage">Emerald Forest & Muted Sage</option>
+                <option value="executive_navy">Executive Navy & Warm Champagne Gold</option>
+                <option value="amber_rust">Amber Rust & Industrial Steel</option>
+                <option value="parchment_espresso">Parchment Paper & Dark Espresso</option>
+              </select>
+            </div>
+
+            <div class="flex items-center justify-between bg-slate-950 p-2 rounded-lg border border-slate-800">
+              <span class="text-[11px] text-slate-300">Base Theme</span>
+              <div class="flex gap-1">
+                <button type="button" id="setSiteThemeDark" class="px-2.5 py-1 text-[11px] rounded font-medium bg-indigo-600 text-white">Dark</button>
+                <button type="button" id="setSiteThemeLight" class="px-2.5 py-1 text-[11px] rounded font-medium bg-slate-800 text-slate-300">Light</button>
+              </div>
+            </div>
+
+            <!-- Granular Hex Overrides -->
+            <div class="pt-2 border-t border-slate-800 grid grid-cols-2 gap-2">
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Primary Action</label>
+                <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded border border-slate-800">
+                  <input type="color" id="primaryColorPicker" value="#ffffff" class="w-5 h-5 rounded border-0 bg-transparent cursor-pointer">
+                  <span id="primaryColorVal" class="text-[10px] font-mono text-slate-300">#ffffff</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Accent Highlight</label>
+                <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded border border-slate-800">
+                  <input type="color" id="accentColorPicker" value="#a1a1aa" class="w-5 h-5 rounded border-0 bg-transparent cursor-pointer">
+                  <span id="accentColorVal" class="text-[10px] font-mono text-slate-300">#a1a1aa</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Background</label>
+                <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded border border-slate-800">
+                  <input type="color" id="bgColorPicker" value="#09090b" class="w-5 h-5 rounded border-0 bg-transparent cursor-pointer">
+                  <span id="bgColorVal" class="text-[10px] font-mono text-slate-300">#09090b</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-slate-400 text-[10px] mb-1">Surface Card</label>
+                <div class="flex items-center gap-1.5 bg-slate-950 p-1 rounded border border-slate-800">
+                  <input type="color" id="surfaceColorPicker" value="#18181b" class="w-5 h-5 rounded border-0 bg-transparent cursor-pointer">
+                  <span id="surfaceColorVal" class="text-[10px] font-mono text-slate-300">#18181b</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 4: Typography Pairings -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Typography & Fonts
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Font Pairing</label>
+              <select id="fontPairing" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="editorial_playfair">Editorial (Playfair Display + Inter)</option>
+                <option value="modern_outfit">Modern Neo-Grotesk (Outfit + Plus Jakarta Sans)</option>
+                <option value="brutalist_space">Neo-Brutalist (Space Grotesk + Inter)</option>
+                <option value="high_fashion_cinzel">Luxury Classical (Cinzel + Plus Jakarta Sans)</option>
+                <option value="editorial_dmserif">Warm Literary (DM Serif Display + Inter)</option>
+                <option value="experimental_syne">Avant-Garde Studio (Syne + Inter)</option>
+                <option value="retro_typewriter">Literary Monospace (Courier Prime + Inter)</option>
+                <option value="tech_jetbrains">Developer Monospace (JetBrains Mono + Inter)</option>
+              </select>
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>Headline Scale</span>
+                <span id="headingScaleVal" class="font-mono text-slate-200">Scale 3 (Bold)</span>
+              </div>
+              <input type="range" id="headingScale" min="1" max="4" value="3" class="w-full custom-range">
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 5: Header, Navigation & Hero Blueprints -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              Header, Nav & Hero Blueprint
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Header / Navigation Style</label>
+              <select id="navLayout" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="minimal_sticky">Minimal Edge-to-Edge Sticky Bar</option>
+                <option value="floating_pill">Glassmorphic Floating Pill with CTA</option>
+                <option value="centered_logo">Balanced Centered Monogram & Split Links</option>
+                <option value="clean_action">Classic Brand Left & High-Contrast Button Right</option>
+                <option value="dropdown_mega">Multi-Tier Menu with Dropdowns</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Hero Section Blueprint</label>
+              <select id="heroLayout" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="minimal_landing">Fullscreen Center Minimalist (Hero Photo + Lone CTA)</option>
+                <option value="split_hero">50/50 Split (Copy Left + Visual Showcase Right)</option>
+                <option value="one_plus_three">1 Hero Lead Banner + 3 Thumbnails Grid</option>
+                <option value="asymmetric_editorial">Asymmetric Editorial Layout with Overlap Frame</option>
+                <option value="card_stack">Centered Header + Floating Metrics Card Stack</option>
+                <option value="video_banner">Dark Cinema Banner with Minimalist Play Pill</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Navbar CTA Text</label>
+              <input type="text" id="navCtaText" value="Inquire Now" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs">
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 6: Visual Image Geometry & Treatment -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+              Image Geometry & Visual Filters
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Border Radius / Geometry</label>
+              <select id="imageRounding" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="none">Sharp Architectural (0px)</option>
+                <option value="soft" selected>Subtle Rounded (12px)</option>
+                <option value="large">Card Curved (24px)</option>
+                <option value="squircle">Squircle / Organic Pill</option>
+                <option value="bordered_frame">Bordered Picture Frame</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+                <span class="text-[11px]">B&W Grayscale</span>
+                <input type="checkbox" id="imageGrayscale" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+              </label>
+              <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+                <span class="text-[11px]">Warm Sepia</span>
+                <input type="checkbox" id="imageSepia" class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+              </label>
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>Hero Overlay Darkness</span>
+                <span id="heroOverlayVal" class="font-mono text-slate-200">45%</span>
+              </div>
+              <input type="range" id="heroOverlayOpacity" min="0" max="85" value="45" class="w-full custom-range">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Custom Hero Image URL (Optional)</label>
+              <input type="text" id="customHeroImg" placeholder="https://images.unsplash.com/..." class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500 placeholder-slate-600">
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 7: Modular Content Sections -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden" open>
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              Modular Content Sections
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-2 bg-slate-900/30">
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">About / Founder Narrative</span>
+              <input type="checkbox" id="sectionAbout" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Services / Core Offerings</span>
+              <input type="checkbox" id="sectionServices" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Visual Showcase / Gallery</span>
+              <input type="checkbox" id="sectionGallery" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Client Reviews & Testimonials</span>
+              <input type="checkbox" id="sectionTestimonials" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Frequently Asked Questions (FAQ)</span>
+              <input type="checkbox" id="sectionFaq" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Metrics & Social Proof Counters</span>
+              <input type="checkbox" id="sectionStats" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+            <label class="flex items-center justify-between p-2 rounded-lg bg-slate-950 border border-slate-800 cursor-pointer">
+              <span class="text-xs">Interactive Inquiry / Booking Form</span>
+              <input type="checkbox" id="sectionContact" checked class="rounded bg-slate-800 border-slate-700 text-indigo-500">
+            </label>
+
+            <div class="pt-2">
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Contact Presentation Mode</label>
+              <select id="contactType" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="form_and_details">Interactive Form + Contact Cards</option>
+                <option value="minimal_cards">Clean Contact Cards Only</option>
+                <option value="newsletter_simple">Minimalist Inquiries & Dispatch</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+        <!-- Accordion 8: Contact Metadata & Footer -->
+        <details class="group bg-slate-800/40 border border-slate-800 rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between p-3 cursor-pointer bg-slate-800/60 font-medium text-slate-200 select-none">
+            <span class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+              Location Metadata & Footer
+            </span>
+            <svg class="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="p-3.5 space-y-3 bg-slate-900/30">
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Contact Email</label>
+              <input type="email" id="contactEmail" value="inquire@auranoirstudio.com" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Contact Phone</label>
+              <input type="text" id="contactPhone" value="+1 (555) 382-9011" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Physical Location</label>
+              <input type="text" id="contactAddress" value="742 Promenade Arts Atelier, 4th Floor" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs">
+            </div>
+            <div>
+              <label class="block text-slate-400 text-[11px] mb-1 font-medium">Footer Architecture</label>
+              <select id="footerLayout" class="w-full bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-slate-100 text-xs focus:border-indigo-500">
+                <option value="modern_columns">Modern 4-Column Directory</option>
+                <option value="minimal_single">Minimal Centered Monogram & Links</option>
+              </select>
+            </div>
+          </div>
+        </details>
+
+      </div>
+    </aside>
+
+    <!-- RIGHT LIVE PREVIEW PANE -->
+    <section class="flex-1 bg-slate-950 flex flex-col relative overflow-hidden">
+      <!-- Preview Toolbar -->
+      <div class="h-10 bg-slate-900/90 border-b border-slate-800 px-4 flex items-center justify-between text-xs text-slate-400 shrink-0">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1.5 text-emerald-400 font-mono text-[11px]">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            LIVE SYNCED
+          </span>
+          <span class="text-slate-700">|</span>
+          <span id="viewportDimensions" class="font-mono text-[11px] text-slate-400">100% (Fluid Desktop)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="openNewTabBtn" title="Open compiled preview in new tab" class="px-2 py-1 text-slate-400 hover:text-white rounded hover:bg-slate-800 transition flex items-center gap-1">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            <span class="hidden sm:inline text-[11px]">New Tab</span>
+          </button>
+          <button id="manualRefreshBtn" title="Force re-render frame" class="p-1 hover:text-white rounded hover:bg-slate-800 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Preview Stage Container -->
+      <div class="flex-1 overflow-auto p-2 sm:p-5 flex items-start justify-center bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]">
+        <div id="previewWrapper" class="preview-frame-transition w-full h-full bg-slate-900 rounded-xl shadow-2xl border border-slate-800 overflow-hidden flex flex-col">
+          <iframe id="previewIframe" class="w-full h-full border-0 bg-white" sandbox="allow-scripts allow-forms allow-same-origin" title="WebForge Live Sandbox"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script>
+    const INDUSTRY_PROFILES = {
+      photo_studio: {
+        name: "Photography & Visual Arts Studio",
+        brandName: "Aura Noir Studio",
+        brandTagline: "Monochrome fine art photography and timeless editorial curation",
+        heroHeadline: "Capturing light, shadow, and unscripted emotion.",
+        heroSubtext: "We craft emotive black & white monographs, portraiture, and architectural installations for galleries and private collectors worldwide.",
+        heroPrimaryBtn: "View Selected Works",
+        heroSecondaryBtn: "Our Manifesto",
+        templateStyle: "monochrome_noir",
+        colorScheme: "monochrome",
+        siteTheme: "dark",
+        fontPairing: "editorial_playfair",
+        navLayout: "minimal_sticky",
+        heroLayout: "minimal_landing",
+        imageRounding: "none",
+        imageGrayscale: true,
+        imageSepia: false,
+        heroOverlayOpacity: "50",
+        heroImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Editorial Portraiture", desc: "Fine-grain monochrome studio portraiture published in global art journals.", icon: "◈" },
+          { title: "Gallery Prints & Archives", desc: "Limited edition museum-grade archival silver gelatin and pigment prints.", icon: "◉" },
+          { title: "Architectural Studies", desc: "Minimalist structural surveys exploring geometric light and brutalism.", icon: "◇" }
+        ],
+        gallery: [
+          { title: "Solitude No. 4", tag: "Silver Gelatin", img: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=800&q=80" },
+          { title: "The Brutalist Monolith", tag: "Architecture", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" },
+          { title: "Shadow Play VII", tag: "Fine Art", img: "https://images.unsplash.com/photo-1516914943479-89db7d9ae7f2?auto=format&fit=crop&w=800&q=80" },
+          { title: "Nocturne Series", tag: "Analog 35mm", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "inquire@auranoirstudio.com",
+        contactPhone: "+1 (555) 382-9011",
+        contactAddress: "742 Promenade Arts Atelier, 4th Floor"
+      },
+      architecture: {
+        name: "Architecture & Interior Design",
+        brandName: "Kolektiv Studio Architects",
+        brandTagline: "Brutalist purity, spatial clarity and sustainable human dwellings",
+        heroHeadline: "Sculpting raw stone, sunlight, and quiet balance.",
+        heroSubtext: "We design private pavilions, cultural spaces, and restorative urban residences governed by structural honesty and timeless restraint.",
+        heroPrimaryBtn: "Explore Built Projects",
+        heroSecondaryBtn: "Monograph Archive",
+        templateStyle: "minimalist_clean",
+        colorScheme: "nordic_slate",
+        siteTheme: "dark",
+        fontPairing: "brutalist_space",
+        navLayout: "centered_logo",
+        heroLayout: "asymmetric_editorial",
+        imageRounding: "none",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "25",
+        heroImage: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Master Spatial Planning", desc: "Comprehensive structural design rooted in passive environmental harmony.", icon: "◫" },
+          { title: "Interior Architecture", desc: "Bespoke millwork, tactile acoustics, and custom furniture curation.", icon: "◩" },
+          { title: "Restoration & Renovation", desc: "Adaptive reuse preserving historic integrity with modern utility.", icon: "◪" }
+        ],
+        gallery: [
+          { title: "Villa Karst", tag: "Residential", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80" },
+          { title: "Nordic Library Pavilion", tag: "Public", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" },
+          { title: "The Obsidian House", tag: "Concept", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" },
+          { title: "Atrium Kyoto", tag: "Cultural", img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "studio@kolektivarch.com",
+        contactPhone: "+1 (555) 720-4100",
+        contactAddress: "88 Mies van der Rohe Way, Studio 12"
+      },
+      bakery_cafe: {
+        name: "Artisanal Bakery & Cafe",
+        brandName: "Farinata Hearth & Ferment",
+        brandTagline: "Slow-fermented sourdoughs, heritage stoneground flours, and morning brew",
+        heroHeadline: "Crafted before dawn. Baked for the spirit.",
+        heroSubtext: "Wild yeasts, single-origin grains, and our 12-year-old mother starter baked daily in an open wood-fired brick hearth.",
+        heroPrimaryBtn: "Browse Daily Bakes",
+        heroSecondaryBtn: "Bread Schedule",
+        templateStyle: "warm_rustic",
+        colorScheme: "terracotta_dune",
+        siteTheme: "light",
+        fontPairing: "editorial_dmserif",
+        navLayout: "centered_logo",
+        heroLayout: "one_plus_three",
+        imageRounding: "soft",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "20",
+        heroImage: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Heritage Sourdough Batards", desc: "36-hour slow fermentation using heirloom organic grains.", icon: "🌾" },
+          { title: "Laminated Viennoiserie", desc: "AOP Normandy butter croissants and seasonal fruit tartelettes.", icon: "🥐" },
+          { title: "Specialty Micro-Roasts", desc: "Direct-trade natural processed coffees pulled on our lever espresso machine.", icon: "☕" }
+        ],
+        gallery: [
+          { title: "Country White Loaf", tag: "Wild Yeast", img: "https://images.unsplash.com/photo-1589367920969-ab8e050bbb04?auto=format&fit=crop&w=800&q=80" },
+          { title: "Morning Croissant", tag: "Viennoiserie", img: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80" },
+          { title: "Rye & Caraway Hearth", tag: "Ancient Grains", img: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=80" },
+          { title: "Filter Brew Pour", tag: "Single Origin", img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "hearth@farinatabakes.com",
+        contactPhone: "+1 (555) 612-4490",
+        contactAddress: "31 Millstone Lane, Flour Quarter"
+      },
+      saas_startup: {
+        name: "Modern Tech & AI SaaS Platform",
+        brandName: "Kinetics Neural Flow",
+        brandTagline: "Zero-latency autonomous intelligence pipelines for edge computing",
+        heroHeadline: "Orchestrate agentic models in fractional milliseconds.",
+        heroSubtext: "Deploy self-healing inference graphs and deterministic multi-modal agents straight to the global edge without infrastructure overhead.",
+        heroPrimaryBtn: "Start Free Sandbox",
+        heroSecondaryBtn: "Read Architecture Docs",
+        templateStyle: "modern_glass",
+        colorScheme: "cyber_violet",
+        siteTheme: "dark",
+        fontPairing: "modern_outfit",
+        navLayout: "floating_pill",
+        heroLayout: "split_hero",
+        imageRounding: "large",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "15",
+        heroImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Autonomous Routing", desc: "Dynamic token-cost switching across leading LLMs with latency safeguards.", icon: "⚡" },
+          { title: "Edge Vector Indices", desc: "Sub-millisecond semantic retrieval cached globally at 300+ PoPs.", icon: "⚛" },
+          { title: "Deterministic Guardrails", desc: "Automated schema enforcement and adversarial prompt isolation.", icon: "🛡" }
+        ],
+        gallery: [
+          { title: "Inference Latency Cluster", tag: "Telemetry", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" },
+          { title: "Agentic Dispatch Visualizer", tag: "Interface", img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" },
+          { title: "Continuous Pipeline Sync", tag: "Edge Node", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" },
+          { title: "Security Attestation", tag: "Compliance", img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "support@kineticsneural.io",
+        contactPhone: "+1 (800) 419-0922",
+        contactAddress: "500 Howard Street, Suite 900, San Francisco, CA"
+      },
+      law_firm: {
+        name: "Law Firm & Strategic Legal Counsel",
+        brandName: "Sterling, Vance & Hargrove LLP",
+        brandTagline: "Decisive advocacy in corporate litigation, cross-border mergers & capital defense",
+        heroHeadline: "Commanding counsel in pivotal commercial affairs.",
+        heroSubtext: "We safeguard founders, private equity consortia, and executive boards facing high-stakes regulatory scrutiny and complex enterprise litigation.",
+        heroPrimaryBtn: "Explore Practice Areas",
+        heroSecondaryBtn: "Our Senior Partners",
+        templateStyle: "elegant_editorial",
+        colorScheme: "executive_navy",
+        siteTheme: "light",
+        fontPairing: "high_fashion_cinzel",
+        navLayout: "clean_action",
+        heroLayout: "split_hero",
+        imageRounding: "soft",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "10",
+        heroImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Corporate Mergers & M&A", desc: "Structuring transnational acquisitions and capital reorganizations.", icon: "⚖" },
+          { title: "Appellate & Trial Litigation", desc: "Rigorous courtroom defense before commercial and federal courts.", icon: "🏛" },
+          { title: "Private Wealth & Trust Advisory", desc: "Multi-generational asset protection and governance structuring.", icon: "📜" }
+        ],
+        gallery: [
+          { title: "Chambers Law Library", tag: "Lexicon", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80" },
+          { title: "Courtroom Advocacy", tag: "Appellate", img: "https://images.unsplash.com/photo-1453733197781-3082245747a7?auto=format&fit=crop&w=800&q=80" },
+          { title: "Merger Syndicate Advisory", tag: "Corporate", img: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80" },
+          { title: "International Arbitrations", tag: "Cross-Border", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "inquiries@sterlingvance.com",
+        contactPhone: "+1 (212) 555-0188",
+        contactAddress: "767 Fifth Avenue, 38th Floor, New York, NY"
+      },
+      fitness_club: {
+        name: "Fitness Club & High-Intensity Conditioning",
+        brandName: "Iron & Kinetic Athletics",
+        brandTagline: "Olympic weightlifting, metabolic resilience, and athletic longevity",
+        heroHeadline: "Uncompromising discipline. Unbroken power.",
+        heroSubtext: "State-of-the-art barbell facilities, bio-metric feedback conditioning, and elite coaching built for athletes who demand real progress.",
+        heroPrimaryBtn: "Claim 7-Day Intro Pass",
+        heroSecondaryBtn: "Weekly Class Schedule",
+        templateStyle: "neo_brutalist",
+        colorScheme: "cyber_violet",
+        siteTheme: "dark",
+        fontPairing: "brutalist_space",
+        navLayout: "clean_action",
+        heroLayout: "card_stack",
+        imageRounding: "none",
+        imageGrayscale: true,
+        imageSepia: false,
+        heroOverlayOpacity: "60",
+        heroImage: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Olympic Strength Blocks", desc: "Clean, snatch, and heavy compound cycles taught by national coaches.", icon: "🏋" },
+          { title: "Metabolic Engine Training", desc: "High-output cardiovascular intervals designed to expand lactate thresholds.", icon: "⏱" },
+          { title: "Active Mobility & Recovery", desc: "Soft-tissue restoration, ice immersions, and joint resilience sessions.", icon: "⚡" }
+        ],
+        gallery: [
+          { title: "The Barbell Rig", tag: "Strength Room", img: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80" },
+          { title: "Conditioning Intervals", tag: "Sprint Track", img: "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80" },
+          { title: "Olympic Platform", tag: "Lifting Bay", img: "https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80" },
+          { title: "Cold Immersion Lab", tag: "Recovery", img: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "membership@ironkinetic.fit",
+        contactPhone: "+1 (555) 914-7720",
+        contactAddress: "120 Foundry Way, Warehouse District"
+      },
+      wellness_spa: {
+        name: "Wellness, Yoga & Spa Sanctuary",
+        brandName: "Prana & Stone Botanical Sanctuary",
+        brandTagline: "Restorative hot stone therapies, mindful breathwork and herbal hydrotherapy",
+        heroHeadline: "Quiet the mind. Restore your natural rhythm.",
+        heroSubtext: "Immerse yourself in mineral thermal baths, wild forest aromatherapy, and ancestral therapeutic touch designed to dissolve urban tension.",
+        heroPrimaryBtn: "Reserve Sanctuary Session",
+        heroSecondaryBtn: "Rituals & Treatments",
+        templateStyle: "warm_rustic",
+        colorScheme: "emerald_sage",
+        siteTheme: "light",
+        fontPairing: "editorial_playfair",
+        navLayout: "centered_logo",
+        heroLayout: "split_hero",
+        imageRounding: "squircle",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "20",
+        heroImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Thermal Mineral Baths", desc: "Subterranean hot springs rich in magnesium and volcanic sulfur.", icon: "♨" },
+          { title: "Botanical Body Rituals", desc: "Wild lavender, rosemary, and cold-pressed marula oil body massages.", icon: "🌿" },
+          { title: "Sound & Breathwork Journeys", desc: "Acoustic Himalayan bowl sessions to release nervous system stress.", icon: "☯" }
+        ],
+        gallery: [
+          { title: "Mineral Thermal Pool", tag: "Hydrotherapy", img: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80" },
+          { title: "Herbal Oil Atelier", tag: "Aromatherapy", img: "https://images.unsplash.com/photo-1608248597359-0a6493b2a2df?auto=format&fit=crop&w=800&q=80" },
+          { title: "Forest Meditation Pavilion", tag: "Mindfulness", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" },
+          { title: "Private Steam Chamber", tag: "Sanctuary", img: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "care@pranastone.sanctuary",
+        contactPhone: "+1 (555) 438-1200",
+        contactAddress: "450 Canyon Moss Road, Valley Vista"
+      },
+      trade_craft: {
+        name: "Landscape, Timber & Artisan Trade",
+        brandName: "Timberstone Guild & Works",
+        brandTagline: "Architectural timber framing, drystone masonry, and native landscaping",
+        heroHeadline: "Built by hand to endure for generations.",
+        heroSubtext: "From massive mortise-and-tenon white oak timber barns to artisanal stone terraces, we practice honest building with natural raw materials.",
+        heroPrimaryBtn: "Request Site Consultation",
+        heroSecondaryBtn: "Our Guild Portfolio",
+        templateStyle: "neo_brutalist",
+        colorScheme: "amber_rust",
+        siteTheme: "dark",
+        fontPairing: "brutalist_space",
+        navLayout: "clean_action",
+        heroLayout: "split_hero",
+        imageRounding: "none",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "25",
+        heroImage: "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Heavy Timber Joinery", desc: "Hand-hewn white oak frames joined with traditional hardwood pegs.", icon: "🪓" },
+          { title: "Native Drystone Walls", desc: "Mortar-free granite and fieldstone walls built with heritage craft.", icon: "🪨" },
+          { title: "Restorative Landscape", desc: "Permaculture garden architecture that thrives with local ecosystems.", icon: "🌱" }
+        ],
+        gallery: [
+          { title: "Oak Frame Pavilion", tag: "Carpentry", img: "https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?auto=format&fit=crop&w=800&q=80" },
+          { title: "Granite Terrace Steps", tag: "Masonry", img: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=800&q=80" },
+          { title: "Wildflower Meadow Garden", tag: "Landscaping", img: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?auto=format&fit=crop&w=800&q=80" },
+          { title: "Bespoke Cedar Pergola", tag: "Outdoor Living", img: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "inquiries@timberstoneguild.com",
+        contactPhone: "+1 (555) 880-3120",
+        contactAddress: "140 Forge & Mill Road, Timber Creek"
+      },
+      bookshop: {
+        name: "Independent Bookshop & Literary Press",
+        brandName: "The Rare Folio & Ink Press",
+        brandTagline: "Curated antiquarian editions, fine letterpress chapbooks and quiet coffee",
+        heroHeadline: "Pages that outlast the modern noise.",
+        heroSubtext: "We collect first-edition literary poetry, philosophical treatises, and independently published zines printed on vintage Heidelberg letterpresses.",
+        heroPrimaryBtn: "Explore Rare Catalog",
+        heroSecondaryBtn: "Literary Salons",
+        templateStyle: "elegant_editorial",
+        colorScheme: "parchment_espresso",
+        siteTheme: "light",
+        fontPairing: "retro_typewriter",
+        navLayout: "centered_logo",
+        heroLayout: "one_plus_three",
+        imageRounding: "bordered_frame",
+        imageGrayscale: false,
+        imageSepia: true,
+        heroOverlayOpacity: "15",
+        heroImage: "https://images.unsplash.com/photo-1507842229450-7905d4e13884?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Antiquarian Book Finding", desc: "Locating authenticated rare printings, out-of-print titles, and autographs.", icon: "📖" },
+          { title: "Letterpress Custom Printing", desc: "Short-run literary journals typeset by hand on heavy cotton rag paper.", icon: "✒" },
+          { title: "Quarterly Book Curations", desc: "Curated parcels of hand-selected fiction shipped to your reading table.", icon: "✉" }
+        ],
+        gallery: [
+          { title: "First Edition Poetry", tag: "Archive", img: "https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=800&q=80" },
+          { title: "The Reading Solarium", tag: "Library", img: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80" },
+          { title: "Heidelberg Press Run", tag: "Letterpress", img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80" },
+          { title: "Leatherbound Folios", tag: "Restoration", img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "librarian@rareinkpress.org",
+        contactPhone: "+1 (555) 773-9821",
+        contactAddress: "12 Antiquary Passage, Bookbinders Row"
+      },
+      boutique_hotel: {
+        name: "Boutique Villa & Coastal Bed & Breakfast",
+        brandName: "Villa Solaria & Coastal Estate",
+        brandTagline: "Sun-drenched Mediterranean terraces, olive groves and coastal serenity",
+        heroHeadline: "A private refuge suspended between blue sea and azure sky.",
+        heroSubtext: "Wake to wild rosemary sea breezes, handcrafted terracotta courtyards, and organic morning harvests overlooking the crystalline cliffs.",
+        heroPrimaryBtn: "Check Suite Availability",
+        heroSecondaryBtn: "Explore The Grounds",
+        templateStyle: "warm_rustic",
+        colorScheme: "terracotta_dune",
+        siteTheme: "light",
+        fontPairing: "editorial_playfair",
+        navLayout: "floating_pill",
+        heroLayout: "minimal_landing",
+        imageRounding: "soft",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "30",
+        heroImage: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Cliffside Master Suites", desc: "Unobstructed sea vistas with private plunge pools and limestone terraces.", icon: "🏖" },
+          { title: "Estate Farm-to-Table Dining", desc: "Nightly multi-course dinners sourced exclusively from our orchard gardens.", icon: "🍋" },
+          { title: "Private Wooden Schooner", desc: "Daytime secluded cove explorations with our licensed estate skipper.", icon: "⛵" }
+        ],
+        gallery: [
+          { title: "Cove Panorama Suite", tag: "Accommodations", img: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" },
+          { title: "Terracotta Courtyard", tag: "Exterior", img: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80" },
+          { title: "Olive Orchard Breakfast", tag: "Dining", img: "https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=800&q=80" },
+          { title: "Sunset Plunge Pool", tag: "Wellness", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "reservations@villasolaria.estate",
+        contactPhone: "+39 (055) 238-9910",
+        contactAddress: "Via dei Cipressi 14, Cliffside Overlook"
+      },
+      design_agency: {
+        name: "Creative Brand & Digital Agency",
+        brandName: "Vortex Creative Syndicate",
+        brandTagline: "High-octane visual identity, interactive web artifacts and cultural branding",
+        heroHeadline: "We engineer digital work that refuses to be ignored.",
+        heroSubtext: "A multidisciplinary team breaking digital monotony with bold typography, expressive webGL interactions, and uncompromising narrative strategy.",
+        heroPrimaryBtn: "View Agency Showreel",
+        heroSecondaryBtn: "Work Capabilities",
+        templateStyle: "vibrant_pop",
+        colorScheme: "cyber_violet",
+        siteTheme: "dark",
+        fontPairing: "experimental_syne",
+        navLayout: "clean_action",
+        heroLayout: "asymmetric_editorial",
+        imageRounding: "large",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "20",
+        heroImage: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Radical Brand Strategy", desc: "Identity systems and typographic guidelines engineered for brand distinction.", icon: "⚡" },
+          { title: "Digital Product Architecture", desc: "Next-generation web applications, design systems, and frontend prototypes.", icon: "👁" },
+          { title: "Motion & Cultural 3D", desc: "Immersive spatial visuals, 3D product renders, and interactive campaigns.", icon: "✦" }
+        ],
+        gallery: [
+          { title: "Hyperdrive Brand Launch", tag: "Identity", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" },
+          { title: "MonoSynth Interface", tag: "Product UI", img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" },
+          { title: "Atelier Berlin Identity", tag: "Editorial", img: "https://images.unsplash.com/photo-1542744094-3a31f272c490?auto=format&fit=crop&w=800&q=80" },
+          { title: "Spatial Web Campaign", tag: "Creative Tech", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "hello@vortexsyndicate.design",
+        contactPhone: "+1 (555) 902-7711",
+        contactAddress: "890 Neon Arcade, Creative Quarter"
+      },
+      medical_clinic: {
+        name: "Medical, Dental & Wellness Clinic",
+        brandName: "Apex Meridian Health & Dentistry",
+        brandTagline: "Integrative patient-first diagnostics, aesthetic dental care and preventive longevity",
+        heroHeadline: "Exceptional clinical care grounded in compassion.",
+        heroSubtext: "Modern diagnostics, non-invasive laser dentistry, and preventive wellness physicians dedicated to restoring your health and confidence.",
+        heroPrimaryBtn: "Schedule Patient Visit",
+        heroSecondaryBtn: "Our Clinical Team",
+        templateStyle: "minimalist_clean",
+        colorScheme: "nordic_slate",
+        siteTheme: "light",
+        fontPairing: "modern_outfit",
+        navLayout: "clean_action",
+        heroLayout: "split_hero",
+        imageRounding: "soft",
+        imageGrayscale: false,
+        imageSepia: false,
+        heroOverlayOpacity: "10",
+        heroImage: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1600&q=80",
+        services: [
+          { title: "Comprehensive Diagnostics", desc: "Digital low-radiation 3D imaging, cardiac screening, and preventative labs.", icon: "🩺" },
+          { title: "Aesthetic Dental Restorations", desc: "Precision porcelain veneers, biological cleaning, and painless aligners.", icon: "✨" },
+          { title: "Longevity & Preventive Health", desc: "Personalized metabolic profiling and nutrition guidance from certified MDs.", icon: "🧬" }
+        ],
+        gallery: [
+          { title: "Surgical Suite 3", tag: "Clinical", img: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" },
+          { title: "Digital Imaging Center", tag: "Diagnostics", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=800&q=80" },
+          { title: "Private Recovery Lounge", tag: "Patient Care", img: "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80" },
+          { title: "Dental Laser Lab", tag: "Specialty", img: "https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80" }
+        ],
+        contactEmail: "appointments@apexmeridian.health",
+        contactPhone: "+1 (555) 240-8800",
+        contactAddress: "220 Medical Center Parkway, Suite 400"
+      }
+    };
+
+    const PALETTES = {
+      monochrome: {
+        dark: { bg: '#09090b', surface: '#18181b', text: '#f4f4f5', muted: '#a1a1aa', primary: '#ffffff', accent: '#71717a', border: '#27272a' },
+        light: { bg: '#ffffff', surface: '#f4f4f5', text: '#09090b', muted: '#71717a', primary: '#09090b', accent: '#3f3f46', border: '#e4e4e7' }
+      },
+      nordic_slate: {
+        dark: { bg: '#0b132b', surface: '#1c2541', text: '#f8fafc', muted: '#94a3b8', primary: '#38bdf8', accent: '#818cf8', border: '#334155' },
+        light: { bg: '#f8fafc', surface: '#ffffff', text: '#0f172a', muted: '#64748b', primary: '#0284c7', accent: '#4f46e5', border: '#e2e8f0' }
+      },
+      terracotta_dune: {
+        dark: { bg: '#1c1412', surface: '#2c1e1a', text: '#fdf8f6', muted: '#a89993', primary: '#fb923c', accent: '#f59e0b', border: '#442b23' },
+        light: { bg: '#fdfbf7', surface: '#ffffff', text: '#291e1a', muted: '#786862', primary: '#c2410c', accent: '#d97706', border: '#f3eae5' }
+      },
+      cyber_violet: {
+        dark: { bg: '#050212', surface: '#0f0b24', text: '#faf5ff', muted: '#a8a29e', primary: '#a855f7', accent: '#ec4899', border: '#261b4d' },
+        light: { bg: '#faf5ff', surface: '#ffffff', text: '#1e1035', muted: '#6b7280', primary: '#9333ea', accent: '#db2777', border: '#e9d5ff' }
+      },
+      emerald_sage: {
+        dark: { bg: '#031b14', surface: '#092b21', text: '#f0fdf4', muted: '#86efac', primary: '#10b981', accent: '#eab308', border: '#0d3d30' },
+        light: { bg: '#f7fdf9', surface: '#ffffff', text: '#052e16', muted: '#374151', primary: '#047857', accent: '#b45309', border: '#dcfce7' }
+      },
+      executive_navy: {
+        dark: { bg: '#030816', surface: '#0d182e', text: '#f8fafc', muted: '#94a3b8', primary: '#f59e0b', accent: '#38bdf8', border: '#1e293b' },
+        light: { bg: '#f8fafc', surface: '#ffffff', text: '#0a1224', muted: '#475569', primary: '#0f172a', accent: '#b45309', border: '#e2e8f0' }
+      },
+      amber_rust: {
+        dark: { bg: '#18120c', surface: '#261a10', text: '#fef3c7', muted: '#a89d8f', primary: '#f59e0b', accent: '#ef4444', border: '#3b2a1a' },
+        light: { bg: '#fffbeb', surface: '#ffffff', text: '#2d1c0b', muted: '#6b5e51', primary: '#b45309', accent: '#dc2626', border: '#fef3c7' }
+      },
+      parchment_espresso: {
+        dark: { bg: '#120f0d', surface: '#1f1b17', text: '#fbf7ee', muted: '#a89f91', primary: '#d4a373', accent: '#ccd5ae', border: '#332c25' },
+        light: { bg: '#faf7f2', surface: '#ffffff', text: '#2b2118', muted: '#6e6154', primary: '#78350f', accent: '#92400e', border: '#ece4d8' }
+      }
+    };
+
+    const FONTS = {
+      editorial_playfair: {
+        heading: "'Playfair Display', Georgia, serif",
+        body: "'Inter', sans-serif",
+        headingWeight: '600',
+        import: 'Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600'
+      },
+      modern_outfit: {
+        heading: "'Outfit', sans-serif",
+        body: "'Plus Jakarta Sans', sans-serif",
+        headingWeight: '700',
+        import: 'Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600'
+      },
+      brutalist_space: {
+        heading: "'Space Grotesk', sans-serif",
+        body: "'Inter', sans-serif",
+        headingWeight: '700',
+        import: 'Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600'
+      },
+      high_fashion_cinzel: {
+        heading: "'Cinzel', Georgia, serif",
+        body: "'Plus Jakarta Sans', sans-serif",
+        headingWeight: '700',
+        import: 'Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600'
+      },
+      editorial_dmserif: {
+        heading: "'DM Serif Display', Georgia, serif",
+        body: "'Inter', sans-serif",
+        headingWeight: '400',
+        import: 'DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500'
+      },
+      experimental_syne: {
+        heading: "'Syne', sans-serif",
+        body: "'Inter', sans-serif",
+        headingWeight: '800',
+        import: 'Syne:wght@700;800&family=Inter:wght@400;500;600'
+      },
+      retro_typewriter: {
+        heading: "'Courier Prime', monospace",
+        body: "'Inter', sans-serif",
+        headingWeight: '700',
+        import: 'Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500'
+      },
+      tech_jetbrains: {
+        heading: "'JetBrains Mono', monospace",
+        body: "'Inter', sans-serif",
+        headingWeight: '700',
+        import: 'JetBrains+Mono:wght@500;700&family=Inter:wght@400;500'
+      }
+    };
+
+    /* State Initialization */
+    let currentConfig = {
+      industry: "photo_studio",
+      templateStyle: "monochrome_noir",
+      layoutDensity: "comfortable",
+      brandName: "Aura Noir Studio",
+      brandTagline: "Monochrome fine art photography and timeless editorial curation",
+      heroHeadline: "Capturing light, shadow, and unscripted emotion.",
+      heroSubtext: "We craft emotive black & white monographs, portraiture, and architectural installations for galleries and private collectors worldwide.",
+      heroPrimaryBtn: "View Selected Works",
+      heroSecondaryBtn: "Our Manifesto",
+      colorScheme: "monochrome",
+      siteTheme: "dark",
+      primaryColor: "#ffffff",
+      accentColor: "#a1a1aa",
+      bgColor: "#09090b",
+      surfaceColor: "#18181b",
+      fontPairing: "editorial_playfair",
+      headingScale: "3",
+      navLayout: "minimal_sticky",
+      navCtaText: "Inquire Now",
+      heroLayout: "minimal_landing",
+      imageRounding: "none",
+      imageGrayscale: true,
+      imageSepia: false,
+      heroOverlayOpacity: "50",
+      customHeroImg: "",
+      sectionAbout: true,
+      sectionServices: true,
+      sectionGallery: true,
+      sectionTestimonials: true,
+      sectionFaq: true,
+      sectionStats: true,
+      sectionContact: true,
+      contactType: "form_and_details",
+      contactEmail: "inquire@auranoirstudio.com",
+      contactPhone: "+1 (555) 382-9011",
+      contactAddress: "742 Promenade Arts Atelier, 4th Floor",
+      footerLayout: "modern_columns"
+    };
+
+    let compiledHtmlCode = "";
+    let updateDebounceTimer = null;
+
+    // DOM Elements Handles
+    const previewIframe = document.getElementById('previewIframe');
+    const previewWrapper = document.getElementById('previewWrapper');
+    const viewportDimText = document.getElementById('viewportDimensions');
+    const welcomeModal = document.getElementById('welcomeModal');
+    const closeWelcomeTopBtn = document.getElementById('closeWelcomeTopBtn');
+    const launchStudioBtn = document.getElementById('launchStudioBtn');
+    const reopenHelpBtn = document.getElementById('reopenHelpBtn');
+    const dontShowAgainCheck = document.getElementById('dontShowAgainCheck');
+    const industrySelect = document.getElementById('industrySelect');
+    const applyPresetDefaultsBtn = document.getElementById('applyPresetDefaultsBtn');
+    const randomizeAllBtn = document.getElementById('randomizeAllBtn');
+    const manualRefreshBtn = document.getElementById('manualRefreshBtn');
+    const openNewTabBtn = document.getElementById('openNewTabBtn');
+    const saveSlotSelect = document.getElementById('saveSlotSelect');
+    const saveSlotBtn = document.getElementById('saveSlotBtn');
+    const loadSlotBtn = document.getElementById('loadSlotBtn');
+    const exportFileBtn = document.getElementById('exportFileBtn');
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+    // Form inputs
+    const templateStyleSelect = document.getElementById('templateStyle');
+    const layoutDensitySelect = document.getElementById('layoutDensity');
+    const brandNameInput = document.getElementById('brandName');
+    const brandTaglineInput = document.getElementById('brandTagline');
+    const heroHeadlineInput = document.getElementById('heroHeadline');
+    const heroSubtextInput = document.getElementById('heroSubtext');
+    const heroPrimaryBtnInput = document.getElementById('heroPrimaryBtn');
+    const heroSecondaryBtnInput = document.getElementById('heroSecondaryBtn');
+    const colorSchemeSelect = document.getElementById('colorSchemePreset');
+    const setSiteThemeDark = document.getElementById('setSiteThemeDark');
+    const setSiteThemeLight = document.getElementById('setSiteThemeLight');
+    const primaryColorPicker = document.getElementById('primaryColorPicker');
+    const accentColorPicker = document.getElementById('accentColorPicker');
+    const bgColorPicker = document.getElementById('bgColorPicker');
+    const surfaceColorPicker = document.getElementById('surfaceColorPicker');
+    const primaryColorVal = document.getElementById('primaryColorVal');
+    const accentColorVal = document.getElementById('accentColorVal');
+    const bgColorVal = document.getElementById('bgColorVal');
+    const surfaceColorVal = document.getElementById('surfaceColorVal');
+    const fontPairingSelect = document.getElementById('fontPairing');
+    const headingScaleRange = document.getElementById('headingScale');
+    const headingScaleVal = document.getElementById('headingScaleVal');
+    const navLayoutSelect = document.getElementById('navLayout');
+    const navCtaTextInput = document.getElementById('navCtaText');
+    const heroLayoutSelect = document.getElementById('heroLayout');
+    const imageRoundingSelect = document.getElementById('imageRounding');
+    const imageGrayscaleCheck = document.getElementById('imageGrayscale');
+    const imageSepiaCheck = document.getElementById('imageSepia');
+    const heroOverlayOpacity = document.getElementById('heroOverlayOpacity');
+    const heroOverlayVal = document.getElementById('heroOverlayVal');
+    const customHeroImgInput = document.getElementById('customHeroImg');
+    const sectionAboutCheck = document.getElementById('sectionAbout');
+    const sectionServicesCheck = document.getElementById('sectionServices');
+    const sectionGalleryCheck = document.getElementById('sectionGallery');
+    const sectionTestimonialsCheck = document.getElementById('sectionTestimonials');
+    const sectionFaqCheck = document.getElementById('sectionFaq');
+    const sectionStatsCheck = document.getElementById('sectionStats');
+    const sectionContactCheck = document.getElementById('sectionContact');
+    const contactTypeSelect = document.getElementById('contactType');
+    const contactEmailInput = document.getElementById('contactEmail');
+    const contactPhoneInput = document.getElementById('contactPhone');
+    const contactAddressInput = document.getElementById('contactAddress');
+    const footerLayoutSelect = document.getElementById('footerLayout');
+  </script>
+
+  <script>
+    function generateHtmlDocument(config) {
+      const activeIndustry = INDUSTRY_PROFILES[config.industry] || INDUSTRY_PROFILES.photo_studio;
+      const paletteGroup = PALETTES[config.colorScheme] || PALETTES.monochrome;
+      const palette = config.siteTheme === 'dark' ? paletteGroup.dark : paletteGroup.light;
+
+      const effectivePrimary = config.primaryColor || palette.primary;
+      const effectiveAccent = config.accentColor || palette.accent;
+      const effectiveBg = config.bgColor || palette.bg;
+      const effectiveSurface = config.surfaceColor || palette.surface;
+      const effectiveText = palette.text;
+      const effectiveMuted = palette.muted;
+      const effectiveBorder = palette.border;
+
+      const font = FONTS[config.fontPairing] || FONTS.editorial_playfair;
+
+      const scales = {
+        '1': { heroText: '2.5rem', heading: '1.85rem', sub: '1rem' },
+        '2': { heroText: '3.25rem', heading: '2.25rem', sub: '1.1rem' },
+        '3': { heroText: '4rem', heading: '2.8rem', sub: '1.25rem' },
+        '4': { heroText: '4.85rem', heading: '3.4rem', sub: '1.35rem' }
+      };
+      const curScale = scales[config.headingScale] || scales['3'];
+
+      // Image rounding
+      let imgBorderRadius = '0px';
+      if (config.imageRounding === 'soft') imgBorderRadius = '12px';
+      else if (config.imageRounding === 'large') imgBorderRadius = '24px';
+      else if (config.imageRounding === 'squircle') imgBorderRadius = '36px 8px 36px 8px';
+      else if (config.imageRounding === 'bordered_frame') imgBorderRadius = '4px';
+
+      let imgFilter = '';
+      if (config.imageGrayscale) imgFilter += 'grayscale(100%) contrast(108%) ';
+      if (config.imageSepia) imgFilter += 'sepia(65%) brightness(95%) ';
+      if (imgFilter === '') imgFilter = 'none';
+
+      // Section padding by density
+      let sectionPad = '5rem 0';
+      if (config.layoutDensity === 'spacious') sectionPad = '7rem 0';
+      if (config.layoutDensity === 'compact') sectionPad = '3.5rem 0';
+
+      const heroImage = (config.customHeroImg && config.customHeroImg.trim() !== '')
+        ? config.customHeroImg.trim()
+        : activeIndustry.heroImage;
+
+      const overlayAlpha = (parseInt(config.heroOverlayOpacity, 10) / 100).toFixed(2);
+
+      // Archetype Specific CSS rules
+      let archetypeCss = '';
+      if (config.templateStyle === 'neo_brutalist') {
+        archetypeCss = `
+          .btn { border: 2px solid #000000 !important; box-shadow: 4px 4px 0px #000000 !important; font-weight: 700 !important; text-transform: uppercase !important; border-radius: 0px !important; }
+          .btn:hover { transform: translate(-2px, -2px) !important; box-shadow: 6px 6px 0px #000000 !important; }
+          .card-styled { border: 2px solid ${effectiveText} !important; box-shadow: 6px 6px 0px ${effectivePrimary} !important; border-radius: 0px !important; }
+          .section-tag { background: ${effectivePrimary} !important; color: ${effectiveBg} !important; padding: 4px 10px !important; border: 1px solid #000000 !important; font-weight: 800 !important; }
+        `;
+      } else if (config.templateStyle === 'modern_glass') {
+        archetypeCss = `
+          .card-styled { background: rgba(255, 255, 255, 0.04) !important; backdrop-filter: blur(16px) !important; border: 1px solid rgba(255, 255, 255, 0.12) !important; box-shadow: 0 20px 40px rgba(0,0,0,0.3) !important; }
+          .btn-primary { background: linear-gradient(135deg, ${effectivePrimary}, ${effectiveAccent}) !important; border: none !important; box-shadow: 0 10px 25px rgba(129, 140, 248, 0.3) !important; }
+          .glow-orb { position: absolute; width: 400px; height: 400px; border-radius: 9999px; background: ${effectivePrimary}; filter: blur(140px); opacity: 0.15; pointer-events: none; }
+        `;
+      } else if (config.templateStyle === 'warm_rustic') {
+        archetypeCss = `
+          .card-styled { border: 1px solid ${effectiveBorder} !important; background: ${effectiveSurface} !important; box-shadow: 0 8px 24px rgba(41, 30, 26, 0.05) !important; }
+          .btn { letter-spacing: 0.04em !important; font-family: var(--font-heading) !important; }
+        `;
+      } else if (config.templateStyle === 'elegant_editorial') {
+        archetypeCss = `
+          .section-title { font-style: italic !important; font-weight: 400 !important; }
+          .card-styled { border-left: 2px solid ${effectivePrimary} !important; border-radius: 0px !important; }
+          .btn { letter-spacing: 0.1em !important; text-transform: uppercase !important; font-size: 0.75rem !important; }
+        `;
+      } else if (config.templateStyle === 'vibrant_pop') {
+        archetypeCss = `
+          .btn { border-radius: 9999px !important; font-weight: 700 !important; transform: scale(1); transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+          .btn:hover { transform: scale(1.05) !important; }
+          .card-styled { border: 2px solid ${effectiveBorder} !important; transition: transform 0.25s ease !important; }
+          .card-styled:hover { transform: translateY(-8px) !important; border-color: ${effectivePrimary} !important; }
+        `;
+      } else if (config.templateStyle === 'monochrome_noir') {
+        archetypeCss = `
+          .card-styled { border: 1px solid ${effectiveBorder} !important; border-radius: 0px !important; }
+          .btn-primary { background: #ffffff !important; color: #000000 !important; border-radius: 0px !important; font-weight: 700 !important; }
+          .btn-outline { border: 1px solid #ffffff !important; color: #ffffff !important; border-radius: 0px !important; }
+        `;
+      }
+
+      // Nav Links Generator
+      const navLinks = [];
+      if (config.sectionAbout) navLinks.push({ label: 'Philosophy', href: '#about' });
+      if (config.sectionServices) navLinks.push({ label: 'Offerings', href: '#services' });
+      if (config.sectionGallery) navLinks.push({ label: 'Showcase', href: '#gallery' });
+      if (config.sectionStats) navLinks.push({ label: 'Metrics', href: '#metrics' });
+      if (config.sectionTestimonials) navLinks.push({ label: 'Reviews', href: '#testimonials' });
+      if (config.sectionFaq) navLinks.push({ label: 'FAQ', href: '#faq' });
+      if (config.sectionContact) navLinks.push({ label: 'Contact', href: '#contact' });
+
+      // Build Navigation Markup
+      let navMarkup = '';
+      if (config.navLayout === 'floating_pill') {
+        navMarkup = `
+        <div class="wf-floating-wrapper">
+          <nav class="wf-pill-bar">
+            <a href="#" class="brand-monogram">${escapeHtml(config.brandName)}</a>
+            <div class="pill-nav-links">
+              ${navLinks.slice(0, 5).map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+            </div>
+            <a href="#contact" class="btn btn-primary btn-sm">${escapeHtml(config.navCtaText)}</a>
+            <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+          </nav>
+          <div id="mobileDrawer" class="mobile-drawer hidden">
+            ${navLinks.map(l => `<a href="${l.href}" onclick="toggleMobileMenu()">${l.label}</a>`).join('')}
+            <a href="#contact" class="btn btn-primary" onclick="toggleMobileMenu()">${escapeHtml(config.navCtaText)}</a>
+          </div>
+        </div>`;
+      } else if (config.navLayout === 'centered_logo') {
+        const half = Math.ceil(navLinks.length / 2);
+        navMarkup = `
+        <header class="wf-header">
+          <div class="wf-container centered-nav-grid">
+            <div class="nav-links left-group">
+              ${navLinks.slice(0, half).map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+            </div>
+            <a href="#" class="brand-monogram text-center">${escapeHtml(config.brandName)}</a>
+            <div class="nav-links right-group">
+              ${navLinks.slice(half).map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+              <a href="#contact" class="btn btn-primary btn-sm">${escapeHtml(config.navCtaText)}</a>
+            </div>
+            <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+          </div>
+          <div id="mobileDrawer" class="mobile-drawer hidden">
+            ${navLinks.map(l => `<a href="${l.href}" onclick="toggleMobileMenu()">${l.label}</a>`).join('')}
+          </div>
+        </header>`;
+      } else if (config.navLayout === 'dropdown_mega') {
+        navMarkup = `
+        <header class="wf-header sticky-header">
+          <div class="wf-container nav-flex-between">
+            <div class="brand-box">
+              <a href="#" class="brand-monogram">${escapeHtml(config.brandName)}</a>
+              <span class="brand-sub">${escapeHtml(config.brandTagline)}</span>
+            </div>
+            <div class="nav-links">
+              ${navLinks.slice(0, 3).map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+              <div class="nav-dropdown-group">
+                <button class="dropdown-trigger">Explore More ▾</button>
+                <div class="dropdown-menu">
+                  ${navLinks.slice(3).map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="nav-cta-wrapper">
+              <a href="#contact" class="btn btn-primary btn-sm">${escapeHtml(config.navCtaText)}</a>
+              <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+            </div>
+          </div>
+          <div id="mobileDrawer" class="mobile-drawer hidden">
+            ${navLinks.map(l => `<a href="${l.href}" onclick="toggleMobileMenu()">${l.label}</a>`).join('')}
+          </div>
+        </header>`;
+      } else {
+        // Clean Sticky or Minimal Edge-to-Edge
+        navMarkup = `
+        <header class="wf-header sticky-header">
+          <div class="wf-container nav-flex-between">
+            <a href="#" class="brand-monogram">${escapeHtml(config.brandName)}</a>
+            <div class="nav-links">
+              ${navLinks.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+            </div>
+            <div class="nav-cta-wrapper">
+              <a href="#contact" class="btn btn-primary btn-sm">${escapeHtml(config.navCtaText)}</a>
+              <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+            </div>
+          </div>
+          <div id="mobileDrawer" class="mobile-drawer hidden">
+            ${navLinks.map(l => `<a href="${l.href}" onclick="toggleMobileMenu()">${l.label}</a>`).join('')}
+            <a href="#contact" class="btn btn-primary" onclick="toggleMobileMenu()">${escapeHtml(config.navCtaText)}</a>
+          </div>
+        </header>`;
+      }
+
+      // Hero Blueprints
+      let heroMarkup = '';
+      if (config.heroLayout === 'minimal_landing') {
+        heroMarkup = `
+        <section class="hero-minimal-fullscreen">
+          <div class="hero-bg-cover" style="background-image: url('${heroImage}');">
+            <div class="hero-overlay-curtain" style="background-color: rgba(0,0,0, ${overlayAlpha});"></div>
+          </div>
+          <div class="wf-container hero-center-content">
+            <span class="section-tag">${escapeHtml(config.brandTagline)}</span>
+            <h1 class="hero-main-title">${escapeHtml(config.heroHeadline)}</h1>
+            <p class="hero-lead-text">${escapeHtml(config.heroSubtext)}</p>
+            <div class="hero-cta-row justify-center">
+              <a href="#gallery" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+              ${config.heroSecondaryBtn ? `<a href="#about" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>` : ''}
+            </div>
+          </div>
+        </section>`;
+      } else if (config.heroLayout === 'split_hero') {
+        heroMarkup = `
+        <section class="hero-split wf-section">
+          <div class="wf-container split-hero-grid">
+            <div class="hero-copy-column">
+              <span class="section-tag">${escapeHtml(config.brandTagline)}</span>
+              <h1 class="hero-main-title">${escapeHtml(config.heroHeadline)}</h1>
+              <p class="hero-lead-text">${escapeHtml(config.heroSubtext)}</p>
+              <div class="hero-cta-row">
+                <a href="#contact" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+                ${config.heroSecondaryBtn ? `<a href="#services" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>` : ''}
+              </div>
+            </div>
+            <div class="hero-media-column">
+              <div class="hero-image-wrapper">
+                <img src="${heroImage}" alt="${escapeHtml(config.brandName)}" class="responsive-img main-hero-img">
+              </div>
+            </div>
+          </div>
+        </section>`;
+      } else if (config.heroLayout === 'one_plus_three') {
+        const gItems = activeIndustry.gallery.slice(0, 3);
+        heroMarkup = `
+        <section class="hero-one-plus-three wf-section text-center">
+          <div class="wf-container max-w-4xl mx-auto mb-8">
+            <span class="section-tag">${escapeHtml(config.brandTagline)}</span>
+            <h1 class="hero-main-title">${escapeHtml(config.heroHeadline)}</h1>
+            <p class="hero-lead-text mx-auto">${escapeHtml(config.heroSubtext)}</p>
+            <div class="hero-cta-row justify-center">
+              <a href="#contact" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+              <a href="#about" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>
+            </div>
+          </div>
+          <div class="wf-container">
+            <div class="lead-hero-banner mb-6">
+              <img src="${heroImage}" alt="${escapeHtml(config.brandName)}" class="responsive-img banner-photo">
+            </div>
+            <div class="three-thumbs-row">
+              ${gItems.map(item => `
+                <div class="thumb-card card-styled">
+                  <img src="${item.img}" alt="${escapeHtml(item.title)}" class="responsive-img thumb-photo">
+                  <div class="thumb-meta">
+                    <strong>${escapeHtml(item.title)}</strong>
+                    <span>${escapeHtml(item.tag)}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>`;
+      } else if (config.heroLayout === 'asymmetric_editorial') {
+        heroMarkup = `
+        <section class="hero-asymmetric wf-section">
+          <div class="wf-container asymmetric-grid">
+            <div class="asymmetric-text">
+              <span class="section-tag">${escapeHtml(config.brandName)} &bull; Established</span>
+              <h1 class="hero-main-title">${escapeHtml(config.heroHeadline)}</h1>
+              <p class="hero-lead-text">${escapeHtml(config.heroSubtext)}</p>
+              <div class="hero-cta-row mb-6">
+                <a href="#contact" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+                <a href="#gallery" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>
+              </div>
+              <div class="editorial-manifesto-badge card-styled p-4">
+                <small class="text-muted block uppercase tracking-wider mb-1">Our Direct Promise</small>
+                <p class="italic text-sm">"Rooted in genuine craft, human dedication and enduring materials."</p>
+              </div>
+            </div>
+            <div class="asymmetric-media">
+              <div class="frame-overlap-stack">
+                <img src="${heroImage}" alt="${escapeHtml(config.brandName)}" class="responsive-img frame-primary">
+                <div class="floating-accent-box card-styled">
+                  <span class="accent-number">100%</span>
+                  <span class="accent-label">Artisan Verified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      } else if (config.heroLayout === 'card_stack') {
+        heroMarkup = `
+        <section class="hero-card-stack wf-section text-center">
+          <div class="wf-container max-w-4xl mx-auto">
+            <span class="section-tag">${escapeHtml(config.brandTagline)}</span>
+            <h1 class="hero-main-title">${escapeHtml(config.heroHeadline)}</h1>
+            <p class="hero-lead-text mx-auto mb-8">${escapeHtml(config.heroSubtext)}</p>
+            <div class="hero-cta-row justify-center mb-10">
+              <a href="#contact" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+              <a href="#services" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>
+            </div>
+            <div class="card-stack-hero card-styled relative overflow-hidden">
+              <img src="${heroImage}" alt="Showcase" class="responsive-img banner-photo">
+              <div class="stack-metrics-grid">
+                <div class="metric-pill">
+                  <strong>24/7</strong>
+                  <span>Readiness</span>
+                </div>
+                <div class="metric-pill">
+                  <strong>0.0ms</strong>
+                  <span>Latency</span>
+                </div>
+                <div class="metric-pill">
+                  <strong>100%</strong>
+                  <span>Discretion</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      } else {
+        // Video / Dark Cinema Banner Style
+        heroMarkup = `
+        <section class="hero-cinema wf-section">
+          <div class="wf-container">
+            <div class="cinema-frame card-styled relative overflow-hidden">
+              <div class="cinema-bg" style="background-image: url('${heroImage}');">
+                <div class="hero-overlay-curtain" style="background-color: rgba(0,0,0, 0.55);"></div>
+              </div>
+              <div class="cinema-content">
+                <div class="play-pill mb-4">
+                  <span class="play-triangle">▶</span> Visual Monograph Reel
+                </div>
+                <h1 class="hero-main-title max-w-3xl">${escapeHtml(config.heroHeadline)}</h1>
+                <p class="hero-lead-text max-w-2xl">${escapeHtml(config.heroSubtext)}</p>
+                <div class="hero-cta-row">
+                  <a href="#contact" class="btn btn-primary">${escapeHtml(config.heroPrimaryBtn)}</a>
+                  <a href="#gallery" class="btn btn-outline">${escapeHtml(config.heroSecondaryBtn)}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // About Section
+      let aboutMarkup = '';
+      if (config.sectionAbout) {
+        aboutMarkup = `
+        <section id="about" class="wf-section alt-surface">
+          <div class="wf-container">
+            <div class="split-hero-grid items-center">
+              <div class="about-image-col">
+                <img src="${activeIndustry.gallery[0]?.img || heroImage}" alt="Studio Founder" class="responsive-img about-portrait card-styled">
+              </div>
+              <div class="about-copy-col">
+                <span class="section-tag">Origin & Purpose</span>
+                <h2 class="section-heading">Form without compromise. Craft without haste.</h2>
+                <p class="paragraph mb-4">At ${escapeHtml(config.brandName)}, our mission is anchored in purposeful clarity. We believe the most lasting creations are born where disciplined technique meets deep human empathy.</p>
+                <p class="paragraph mb-6">Whether orchestrating complex systems or crafting single bespoke editions, our studio operates as an intimate partner committed to enduring excellence.</p>
+                <div class="founder-sig-row">
+                  <div class="avatar-circle">✦</div>
+                  <div>
+                    <strong>Studio Direction Syndicate</strong>
+                    <span class="block text-muted text-xs">Curators & Principal Craftsmen</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // Services Section
+      let servicesMarkup = '';
+      if (config.sectionServices) {
+        servicesMarkup = `
+        <section id="services" class="wf-section">
+          <div class="wf-container">
+            <div class="section-header-block text-center">
+              <span class="section-tag">Core Offerings</span>
+              <h2 class="section-heading">Disciplines of Practice</h2>
+              <p class="section-sub-copy">Delivered with technical precision and architectural consistency.</p>
+            </div>
+            <div class="services-grid">
+              ${activeIndustry.services.map(s => `
+                <div class="service-card card-styled">
+                  <div class="service-icon-glyph">${s.icon}</div>
+                  <h3 class="service-title">${escapeHtml(s.title)}</h3>
+                  <p class="service-desc">${escapeHtml(s.desc)}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // Gallery Showcase Section
+      let galleryMarkup = '';
+      if (config.sectionGallery) {
+        galleryMarkup = `
+        <section id="gallery" class="wf-section alt-surface">
+          <div class="wf-container">
+            <div class="section-header-row flex-between">
+              <div>
+                <span class="section-tag">Curated Archive</span>
+                <h2 class="section-heading">Selected Commissions</h2>
+              </div>
+              <span class="text-muted text-xs font-mono">Catalog 2024–2026</span>
+            </div>
+            <div class="gallery-mosaic-grid">
+              ${activeIndustry.gallery.map(g => `
+                <div class="mosaic-item card-styled">
+                  <div class="mosaic-media-container">
+                    <img src="${g.img}" alt="${escapeHtml(g.title)}" class="responsive-img mosaic-img">
+                  </div>
+                  <div class="mosaic-meta-row">
+                    <h4 class="mosaic-title">${escapeHtml(g.title)}</h4>
+                    <span class="mosaic-badge">${escapeHtml(g.tag)}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // Metrics & Social Proof
+      let statsMarkup = '';
+      if (config.sectionStats) {
+        statsMarkup = `
+        <section id="metrics" class="wf-section">
+          <div class="wf-container">
+            <div class="stats-ribbon card-styled">
+              <div class="stat-col">
+                <span class="stat-big-num">14+</span>
+                <span class="stat-label">Years of Mastery</span>
+              </div>
+              <div class="stat-col">
+                <span class="stat-big-num">320+</span>
+                <span class="stat-label">Commissions Realized</span>
+              </div>
+              <div class="stat-col">
+                <span class="stat-big-num">99.4%</span>
+                <span class="stat-label">Client Retention</span>
+              </div>
+              <div class="stat-col">
+                <span class="stat-big-num">24h</span>
+                <span class="stat-label">Guaranteed Response</span>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // Testimonials Section
+      let testimonialsMarkup = '';
+      if (config.sectionTestimonials) {
+        testimonialsMarkup = `
+        <section id="testimonials" class="wf-section alt-surface">
+          <div class="wf-container">
+            <div class="section-header-block text-center">
+              <span class="section-tag">Patron Voices</span>
+              <h2 class="section-heading">Endorsements & Critiques</h2>
+            </div>
+            <div class="testimonials-grid">
+              <div class="quote-card card-styled">
+                <div class="stars-row">★★★★★</div>
+                <p class="quote-body">"Collaborating with ${escapeHtml(config.brandName)} redefined our brand benchmark. Their poise, discretion, and eye for detail are unmatched in contemporary practice."</p>
+                <div class="author-block">
+                  <div class="author-avatar-badge">AR</div>
+                  <div>
+                    <strong>Alexander Rossi</strong>
+                    <span class="block text-muted text-xs">Managing Director, Studio V</span>
+                  </div>
+                </div>
+              </div>
+              <div class="quote-card card-styled">
+                <div class="stars-row">★★★★★</div>
+                <p class="quote-body">"What stands out most is the quiet confidence in their execution. Zero clutter, pure elegance, and a work process that felt intuitive from day one."</p>
+                <div class="author-block">
+                  <div class="author-avatar-badge">ML</div>
+                  <div>
+                    <strong>Miriam Laurent</strong>
+                    <span class="block text-muted text-xs">Art Director, Revue Nouvelle</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // FAQ Section
+      let faqMarkup = '';
+      if (config.sectionFaq) {
+        faqMarkup = `
+        <section id="faq" class="wf-section">
+          <div class="wf-container max-w-3xl mx-auto">
+            <div class="section-header-block text-center mb-8">
+              <span class="section-tag">Transparency</span>
+              <h2 class="section-heading">Frequently Addressed Queries</h2>
+            </div>
+            <div class="faq-list space-y-4">
+              <details class="faq-item card-styled p-4 cursor-pointer" open>
+                <summary class="font-semibold flex justify-between items-center select-none">
+                  <span>How does your initial engagement and discovery work?</span>
+                  <span class="text-muted">▾</span>
+                </summary>
+                <p class="paragraph mt-3 text-sm">We begin with a structured consultation to outline parameters, material choices, and strategic goals before initiating any production work.</p>
+              </details>
+              <details class="faq-item card-styled p-4 cursor-pointer">
+                <summary class="font-semibold flex justify-between items-center select-none">
+                  <span>What are your customary timelines for commissions?</span>
+                  <span class="text-muted">▾</span>
+                </summary>
+                <p class="paragraph mt-3 text-sm">Most projects range between 2 to 6 weeks depending on scale, physical material procurement, and iterative refinement requirements.</p>
+              </details>
+              <details class="faq-item card-styled p-4 cursor-pointer">
+                <summary class="font-semibold flex justify-between items-center select-none">
+                  <span>Do you handle international engagements?</span>
+                  <span class="text-muted">▾</span>
+                </summary>
+                <p class="paragraph mt-3 text-sm">Yes, we routinely work with patrons and enterprises across North America, Europe, Australia, and East Asia with complete digital facilitation.</p>
+              </details>
+            </div>
+          </div>
+        </section>`;
+      }
+
+      // Contact Section
+      let contactMarkup = '';
+      if (config.sectionContact) {
+        if (config.contactType === 'form_and_details') {
+          contactMarkup = `
+          <section id="contact" class="wf-section alt-surface">
+            <div class="wf-container">
+              <div class="contact-split-grid">
+                <div class="contact-info-panel">
+                  <span class="section-tag">Direct Dialogue</span>
+                  <h2 class="section-heading">Let's discuss your next project.</h2>
+                  <p class="paragraph mb-8">Our workshop is open for select commissions and inquiries. Reach out to coordinate an initial consultation.</p>
+                  <div class="contact-meta-cards space-y-4">
+                    <div class="c-meta-box card-styled p-3.5">
+                      <span class="c-meta-label">Electronic Mail</span>
+                      <strong class="c-meta-val">${escapeHtml(config.contactEmail)}</strong>
+                    </div>
+                    <div class="c-meta-box card-styled p-3.5">
+                      <span class="c-meta-label">Telephone</span>
+                      <strong class="c-meta-val">${escapeHtml(config.contactPhone)}</strong>
+                    </div>
+                    <div class="c-meta-box card-styled p-3.5">
+                      <span class="c-meta-label">Studio Atelier</span>
+                      <strong class="c-meta-val">${escapeHtml(config.contactAddress)}</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-form-panel">
+                  <form class="interactive-form card-styled p-6" onsubmit="handleContactSubmit(event)">
+                    <div class="form-field mb-4">
+                      <label>Your Full Name</label>
+                      <input type="text" required placeholder="Elena Rostova" class="form-input">
+                    </div>
+                    <div class="form-field mb-4">
+                      <label>Email Address</label>
+                      <input type="email" required placeholder="elena@studio.com" class="form-input">
+                    </div>
+                    <div class="form-field mb-4">
+                      <label>Project Scope or Purpose</label>
+                      <input type="text" placeholder="Bespoke commission, consultation, or advisory" class="form-input">
+                    </div>
+                    <div class="form-field mb-5">
+                      <label>Brief Vision & Timeline</label>
+                      <textarea rows="4" required placeholder="Share your core requirements and preferred schedule..." class="form-input"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">Transmit Inquiry</button>
+                    <div id="contactSuccessMsg" class="form-success-banner hidden">
+                      ✓ Inquiry transmitted safely. Our studio will reply within 24 hours.
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>`;
+        } else if (config.contactType === 'minimal_cards') {
+          contactMarkup = `
+          <section id="contact" class="wf-section alt-surface text-center">
+            <div class="wf-container max-w-4xl mx-auto">
+              <span class="section-tag">Direct Dialogue</span>
+              <h2 class="section-heading">Connect with our Workshop</h2>
+              <div class="contact-cards-row mt-8">
+                <div class="card-styled p-6">
+                  <div class="text-2xl mb-2">✉</div>
+                  <h4 class="font-bold mb-1">Electronic Mail</h4>
+                  <p class="text-muted text-sm">${escapeHtml(config.contactEmail)}</p>
+                </div>
+                <div class="card-styled p-6">
+                  <div class="text-2xl mb-2">☎</div>
+                  <h4 class="font-bold mb-1">Direct Telephone</h4>
+                  <p class="text-muted text-sm">${escapeHtml(config.contactPhone)}</p>
+                </div>
+                <div class="card-styled p-6">
+                  <div class="text-2xl mb-2">📍</div>
+                  <h4 class="font-bold mb-1">Physical Atelier</h4>
+                  <p class="text-muted text-sm">${escapeHtml(config.contactAddress)}</p>
+                </div>
+              </div>
+            </div>
+          </section>`;
+        } else {
+          contactMarkup = `
+          <section id="contact" class="wf-section alt-surface text-center">
+            <div class="wf-container max-w-2xl mx-auto">
+              <span class="section-tag">Private Dispatch</span>
+              <h2 class="section-heading">Receive Seasonal Monographs</h2>
+              <p class="paragraph mb-6">Invitations to gallery exhibitions, architectural publications and private atelier open days.</p>
+              <form class="newsletter-input-group" onsubmit="handleContactSubmit(event)">
+                <input type="email" required placeholder="Enter your email address" class="form-input">
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+              </form>
+              <div id="contactSuccessMsg" class="form-success-banner hidden mt-3">
+                ✓ You are registered on our private monograph mailing register.
+              </div>
+            </div>
+          </section>`;
+        }
+      }
+
+      // Footer
+      let footerMarkup = '';
+      if (config.footerLayout === 'modern_columns') {
+        footerMarkup = `
+        <footer class="wf-footer">
+          <div class="wf-container footer-cols-layout">
+            <div class="footer-brand-bio">
+              <h4 class="brand-monogram">${escapeHtml(config.brandName)}</h4>
+              <p class="text-muted text-xs mt-2 max-w-xs">${escapeHtml(config.brandTagline)}</p>
+            </div>
+            <div class="footer-link-col">
+              <h5>Navigation</h5>
+              ${navLinks.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+            </div>
+            <div class="footer-link-col">
+              <h5>Correspondence</h5>
+              <a href="mailto:${escapeHtml(config.contactEmail)}">${escapeHtml(config.contactEmail)}</a>
+              <a href="#">Instagram Journal</a>
+              <a href="#">Behance Portfolio</a>
+              <a href="#">LinkedIn Presence</a>
+            </div>
+            <div class="footer-link-col">
+              <h5>Colophon</h5>
+              <p class="text-muted text-xs">Generated with WebForge Studio Pro.<br>Zero framework runtime dependencies.<br>Static web standards.</p>
+            </div>
+          </div>
+          <div class="wf-container footer-fineprint-row">
+            <span>&copy; ${new Date().getFullYear()} ${escapeHtml(config.brandName)}. All rights reserved.</span>
+            <a href="#" class="top-anchor-btn" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Back to Top ↑</a>
+          </div>
+        </footer>`;
+      } else {
+        footerMarkup = `
+        <footer class="wf-footer text-center">
+          <div class="wf-container">
+            <h4 class="brand-monogram mb-2">${escapeHtml(config.brandName)}</h4>
+            <div class="footer-social-inline mb-4">
+              <a href="#">Instagram</a> &bull;
+              <a href="#">Behance</a> &bull;
+              <a href="#">LinkedIn</a> &bull;
+              <a href="#">Colophon</a>
+            </div>
+            <div class="footer-fineprint-row justify-center">
+              <span>&copy; ${new Date().getFullYear()} ${escapeHtml(config.brandName)}. Built with WebForge Studio Pro.</span>
+            </div>
+          </div>
+        </footer>`;
+      }
+
+      // Assemble Standalone Document
+      return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${escapeHtml(config.brandName)} &bull; ${escapeHtml(config.brandTagline)}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=${font.import}&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: ${effectiveBg};
+      --surface: ${effectiveSurface};
+      --text: ${effectiveText};
+      --muted: ${effectiveMuted};
+      --border: ${effectiveBorder};
+      --primary: ${effectivePrimary};
+      --accent: ${effectiveAccent};
+      --font-heading: ${font.heading};
+      --font-body: ${font.body};
+      --heading-weight: ${font.headingWeight};
+      --hero-scale: ${curScale.heroText};
+      --heading-scale: ${curScale.heading};
+      --sub-scale: ${curScale.sub};
+      --img-radius: ${imgBorderRadius};
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; transition: opacity 0.2s; }
+    a:hover { opacity: 0.82; }
+    .wf-container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    .wf-section { padding: ${sectionPad}; position: relative; }
+    .alt-surface { background-color: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    h1, h2, h3, h4, h5, .brand-monogram { font-family: var(--font-heading); font-weight: var(--heading-weight); line-height: 1.2; color: var(--text); }
+    .brand-monogram { font-size: 1.25rem; letter-spacing: -0.01em; }
+    .hero-main-title { font-size: var(--hero-scale); margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+    .hero-lead-text { font-size: var(--sub-scale); color: var(--muted); margin-bottom: 2rem; max-width: 680px; line-height: 1.65; }
+    .section-heading { font-size: var(--heading-scale); margin-bottom: 0.75rem; letter-spacing: -0.015em; }
+    .section-tag { display: inline-block; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.15em; font-weight: 700; color: var(--primary); margin-bottom: 0.75rem; }
+    .section-sub-copy { color: var(--muted); max-width: 600px; margin: 0 auto 2.5rem; font-size: 1rem; }
+    .paragraph { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+    .text-muted { color: var(--muted); }
+    .responsive-img {
+      max-width: 100%; height: auto; display: block; border-radius: var(--img-radius);
+      filter: ${imgFilter}; transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.75rem 1.6rem; font-size: 0.875rem; font-weight: 600;
+      border-radius: 9999px; cursor: pointer; border: 1px solid transparent;
+      transition: all 0.2s ease; text-align: center;
+    }
+    .btn-sm { padding: 0.5rem 1.1rem; font-size: 0.8rem; }
+    .btn-primary { background-color: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-outline { background-color: transparent; color: var(--text); border-color: var(--border); }
+    .btn-outline:hover { background-color: var(--surface); border-color: var(--text); }
+    /* Headers */
+    .wf-header { background-color: var(--bg); border-bottom: 1px solid var(--border); position: relative; z-index: 40; }
+    .sticky-header { position: sticky; top: 0; backdrop-filter: blur(12px); background-color: rgba(var(--bg), 0.88); }
+    .nav-flex-between { height: 70px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; font-size: 0.875rem; font-weight: 500; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+    .nav-toggle { display: none; background: transparent; border: 0; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+    .mobile-drawer { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; background-color: var(--surface); border-bottom: 1px solid var(--border); }
+    .mobile-drawer.hidden { display: none; }
+    /* Floating Pill Header */
+    .wf-floating-wrapper { position: sticky; top: 1rem; z-index: 50; display: flex; justify-content: center; padding: 0 1rem; }
+    .wf-pill-bar {
+      background-color: var(--surface); backdrop-filter: blur(16px); border: 1px solid var(--border);
+      padding: 0.6rem 1.4rem; border-radius: 9999px; display: flex; align-items: center; gap: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .pill-nav-links { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--muted); }
+    /* Centered Nav */
+    .centered-nav-grid { height: 80px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    .centered-nav-grid .right-group { justify-content: flex-end; }
+    /* Dropdown Mega */
+    .nav-dropdown-group { position: relative; }
+    .dropdown-trigger { background: transparent; border: 0; color: var(--muted); font-size: 0.875rem; cursor: pointer; }
+    .dropdown-menu {
+      display: none; position: absolute; top: 100%; right: 0; margin-top: 0.5rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.5rem 0; min-width: 140px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .nav-dropdown-group:hover .dropdown-menu { display: flex; flex-direction: column; }
+    .dropdown-menu a { padding: 0.5rem 1rem; font-size: 0.8rem; }
+    .dropdown-menu a:hover { background: rgba(255,255,255,0.05); }
+    /* Hero Layouts */
+    .hero-minimal-fullscreen {
+      position: relative; min-height: 86vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #ffffff; overflow: hidden;
+    }
+    .hero-bg-cover { position: absolute; inset: 0; background-size: cover; background-position: center; filter: ${imgFilter}; }
+    .hero-overlay-curtain { position: absolute; inset: 0; }
+    .hero-center-content { position: relative; z-index: 2; max-width: 820px; padding: 4rem 1.5rem; }
+    .hero-cta-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .split-hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+    .main-hero-img { width: 100%; height: 480px; object-fit: cover; }
+    /* One Plus Three */
+    .banner-photo { width: 100%; height: 400px; object-fit: cover; }
+    .three-thumbs-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .thumb-card { overflow: hidden; border: 1px solid var(--border); background: var(--surface); border-radius: var(--img-radius); }
+    .thumb-photo { width: 100%; height: 200px; object-fit: cover; }
+    .thumb-meta { padding: 0.85rem; display: flex; justify-content: space-between; font-size: 0.8rem; }
+    /* Asymmetric Editorial */
+    .asymmetric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .frame-overlap-stack { position: relative; }
+    .frame-primary { width: 100%; height: 500px; object-fit: cover; }
+    .floating-accent-box {
+      position: absolute; bottom: -20px; left: -20px; background: var(--surface);
+      border: 1px solid var(--border); padding: 1.25rem 1.75rem; box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+    .accent-number { display: block; font-size: 2rem; font-weight: 800; color: var(--primary); line-height: 1; }
+    .accent-label { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); }
+    /* Card Stack */
+    .card-stack-hero { border: 1px solid var(--border); }
+    .stack-metrics-grid {
+      position: absolute; bottom: 0; inset-x: 0; background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      padding: 1.5rem; display: flex; justify-content: space-around; color: #ffffff;
+    }
+    .metric-pill strong { display: block; font-size: 1.5rem; }
+    .metric-pill span { font-size: 0.75rem; color: rgba(255,255,255,0.7); text-transform: uppercase; }
+    /* Cinema */
+    .cinema-frame { min-height: 520px; display: flex; align-items: flex-end; padding: 3rem; color: #ffffff; border: 1px solid var(--border); }
+    .cinema-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: ${imgFilter}; }
+    .cinema-content { position: relative; z-index: 2; }
+    .play-pill { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); font-size: 0.75rem; font-weight: 600; }
+    /* About Portrait */
+    .about-portrait { width: 100%; height: 460px; object-fit: cover; }
+    .founder-sig-row { display: flex; align-items: center; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.25rem; }
+    .avatar-circle { width: 44px; height: 44px; border-radius: 9999px; background: var(--border); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 1.2rem; }
+    /* Services Grid */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem; }
+    .service-card { background: var(--surface); padding: 2.5rem 2rem; border: 1px solid var(--border); border-radius: var(--img-radius); }
+    .service-icon-glyph { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+    .service-title { font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .service-desc { font-size: 0.875rem; color: var(--muted); }
+    /* Gallery Mosaic */
+    .gallery-mosaic-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .mosaic-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--img-radius); overflow: hidden; }
+    .mosaic-img { width: 100%; height: 320px; object-fit: cover; }
+    .mosaic-meta-row { padding: 1.25rem; display: flex; justify-content: space-between; align-items: center; }
+    .mosaic-badge { font-size: 0.75rem; padding: 0.25rem 0.6rem; border-radius: 9999px; background: rgba(255,255,255,0.06); color: var(--muted); }
+    /* Metrics Ribbon */
+    .stats-ribbon { background: var(--surface); border: 1px solid var(--border); border-radius: var(--img-radius); padding: 2.5rem 2rem; display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 1.5rem; }
+    .stat-big-num { display: block; font-size: 2.5rem; font-weight: 800; font-family: var(--font-heading); color: var(--primary); }
+    .stat-label { font-size: 0.75rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; }
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; }
+    .quote-card { background: var(--surface); border: 1px solid var(--border); padding: 2.5rem; border-radius: var(--img-radius); }
+    .stars-row { color: var(--accent); margin-bottom: 1rem; letter-spacing: 2px; }
+    .quote-body { font-size: 1.05rem; font-style: italic; margin-bottom: 1.5rem; }
+    .author-block { display: flex; align-items: center; gap: 1rem; }
+    .author-avatar-badge { width: 42px; height: 42px; border-radius: 9999px; background: var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); font-size: 0.85rem; }
+    /* Contact */
+    .contact-split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .c-meta-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--img-radius); }
+    .c-meta-label { display: block; font-size: 0.75rem; text-transform: uppercase; color: var(--muted); }
+    .c-meta-val { font-size: 0.95rem; }
+    .interactive-form { background: var(--surface); border: 1px solid var(--border); border-radius: var(--img-radius); }
+    .form-field label { display: block; font-size: 0.8rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .form-input {
+      width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+      padding: 0.75rem 1rem; font-size: 0.9rem; color: var(--text); outline: none; font-family: inherit;
+    }
+    .form-input:focus { border-color: var(--primary); }
+    .form-success-banner { padding: 0.85rem; border-radius: 8px; background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #10b981; font-size: 0.85rem; text-align: center; margin-top: 1rem; }
+    .contact-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    .newsletter-input-group { display: flex; gap: 0.75rem; }
+    /* Footer */
+    .wf-footer { background: var(--bg); border-top: 1px solid var(--border); padding: 4.5rem 0 2.5rem; font-size: 0.875rem; }
+    .footer-cols-layout { display: grid; grid-template-columns: 2fr 1fr 1.5fr 1.5fr; gap: 3rem; margin-bottom: 3.5rem; }
+    .footer-link-col { display: flex; flex-direction: column; gap: 0.65rem; }
+    .footer-link-col h5 { font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+    .footer-fineprint-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 2rem; color: var(--muted); font-size: 0.8rem; }
+    /* Helpers */
+    .text-center { text-align: center; }
+    .flex-between { display: flex; justify-content: space-between; align-items: flex-end; }
+    .justify-center { justify-content: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .w-full { width: 100%; }
+
+    /* Custom Archetype Injections */
+    ${archetypeCss}
+
+    /* Breakpoints */
+    @media (max-width: 960px) {
+      .split-hero-grid, .asymmetric-grid, .contact-split-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .services-grid, .three-thumbs-row, .contact-cards-row, .stats-ribbon { grid-template-columns: 1fr; }
+      .gallery-mosaic-grid, .testimonials-grid, .footer-cols-layout { grid-template-columns: 1fr; }
+      .nav-links, .nav-cta-wrapper .btn { display: none; }
+      .nav-toggle { display: block; }
+      .centered-nav-grid { display: flex; justify-content: space-between; }
+      .centered-nav-grid .left-group, .centered-nav-grid .right-group { display: none; }
+      .wf-pill-bar .pill-nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  ${navMarkup}
+
+  <!-- Hero Section -->
+  ${heroMarkup}
+
+  <!-- About Section -->
+  ${aboutMarkup}
+
+  <!-- Services / Offerings -->
+  ${servicesMarkup}
+
+  <!-- Gallery / Mosaic -->
+  ${galleryMarkup}
+
+  <!-- Metrics Proof -->
+  ${statsMarkup}
+
+  <!-- Testimonials -->
+  ${testimonialsMarkup}
+
+  <!-- FAQ Accordion -->
+  ${faqMarkup}
+
+  <!-- Contact & Booking -->
+  ${contactMarkup}
+
+  <!-- Footer -->
+  ${footerMarkup}
+
+  <script>
+    function toggleMobileMenu() {
+      var d = document.getElementById('mobileDrawer');
+      if (d) d.classList.toggle('hidden');
+    }
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      var m = document.getElementById('contactSuccessMsg');
+      if (m) {
+        m.classList.remove('hidden');
+        setTimeout(function() { m.classList.add('hidden'); }, 5000);
+      }
+    }
+  <\\/script>
+</body>
+</html>`;
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+
+  <script>
+    function triggerReactivePreview() {
+      if (updateDebounceTimer) clearTimeout(updateDebounceTimer);
+      updateDebounceTimer = setTimeout(() => {
+        executePreviewCompilation();
+      }, 35);
+    }
+
+    function executePreviewCompilation() {
+      compiledHtmlCode = generateHtmlDocument(currentConfig);
+      const cleanExecutable = compiledHtmlCode.replace('<\\/script>', '</' + 'script>');
+      previewIframe.srcdoc = cleanExecutable;
+    }
+
+    function syncFormFromConfig(cfg) {
+      industrySelect.value = cfg.industry;
+      templateStyleSelect.value = cfg.templateStyle;
+      layoutDensitySelect.value = cfg.layoutDensity;
+      brandNameInput.value = cfg.brandName;
+      brandTaglineInput.value = cfg.brandTagline;
+      heroHeadlineInput.value = cfg.heroHeadline;
+      heroSubtextInput.value = cfg.heroSubtext;
+      heroPrimaryBtnInput.value = cfg.heroPrimaryBtn;
+      heroSecondaryBtnInput.value = cfg.heroSecondaryBtn;
+      colorSchemeSelect.value = cfg.colorScheme;
+      primaryColorPicker.value = cfg.primaryColor;
+      accentColorPicker.value = cfg.accentColor;
+      bgColorPicker.value = cfg.bgColor;
+      surfaceColorPicker.value = cfg.surfaceColor;
+      primaryColorVal.textContent = cfg.primaryColor;
+      accentColorVal.textContent = cfg.accentColor;
+      bgColorVal.textContent = cfg.bgColor;
+      surfaceColorVal.textContent = cfg.surfaceColor;
+      fontPairingSelect.value = cfg.fontPairing;
+      headingScaleRange.value = cfg.headingScale;
+      headingScaleVal.textContent = `Scale ${cfg.headingScale}`;
+      navLayoutSelect.value = cfg.navLayout;
+      navCtaTextInput.value = cfg.navCtaText;
+      heroLayoutSelect.value = cfg.heroLayout;
+      imageRoundingSelect.value = cfg.imageRounding;
+      imageGrayscaleCheck.checked = cfg.imageGrayscale;
+      imageSepiaCheck.checked = cfg.imageSepia;
+      heroOverlayOpacity.value = cfg.heroOverlayOpacity;
+      heroOverlayVal.textContent = `${cfg.heroOverlayOpacity}%`;
+      customHeroImgInput.value = cfg.customHeroImg;
+      sectionAboutCheck.checked = cfg.sectionAbout;
+      sectionServicesCheck.checked = cfg.sectionServices;
+      sectionGalleryCheck.checked = cfg.sectionGallery;
+      sectionTestimonialsCheck.checked = cfg.sectionTestimonials;
+      sectionFaqCheck.checked = cfg.sectionFaq;
+      sectionStatsCheck.checked = cfg.sectionStats;
+      sectionContactCheck.checked = cfg.sectionContact;
+      contactTypeSelect.value = cfg.contactType;
+      contactEmailInput.value = cfg.contactEmail;
+      contactPhoneInput.value = cfg.contactPhone;
+      contactAddressInput.value = cfg.contactAddress;
+      footerLayoutSelect.value = cfg.footerLayout;
+
+      if (cfg.siteTheme === 'dark') {
+        setSiteThemeDark.className = "px-2.5 py-1 text-[11px] rounded font-medium bg-indigo-600 text-white";
+        setSiteThemeLight.className = "px-2.5 py-1 text-[11px] rounded font-medium bg-slate-800 text-slate-300";
+      } else {
+        setSiteThemeLight.className = "px-2.5 py-1 text-[11px] rounded font-medium bg-indigo-600 text-white";
+        setSiteThemeDark.className = "px-2.5 py-1 text-[11px] rounded font-medium bg-slate-800 text-slate-300";
+      }
+    }
+
+    function readStateFromFormInputs() {
+      currentConfig.industry = industrySelect.value;
+      currentConfig.templateStyle = templateStyleSelect.value;
+      currentConfig.layoutDensity = layoutDensitySelect.value;
+      currentConfig.brandName = brandNameInput.value;
+      currentConfig.brandTagline = brandTaglineInput.value;
+      currentConfig.heroHeadline = heroHeadlineInput.value;
+      currentConfig.heroSubtext = heroSubtextInput.value;
+      currentConfig.heroPrimaryBtn = heroPrimaryBtnInput.value;
+      currentConfig.heroSecondaryBtn = heroSecondaryBtnInput.value;
+      currentConfig.colorScheme = colorSchemeSelect.value;
+      currentConfig.primaryColor = primaryColorPicker.value;
+      currentConfig.accentColor = accentColorPicker.value;
+      currentConfig.bgColor = bgColorPicker.value;
+      currentConfig.surfaceColor = surfaceColorPicker.value;
+      currentConfig.fontPairing = fontPairingSelect.value;
+      currentConfig.headingScale = headingScaleRange.value;
+      currentConfig.navLayout = navLayoutSelect.value;
+      currentConfig.navCtaText = navCtaTextInput.value;
+      currentConfig.heroLayout = heroLayoutSelect.value;
+      currentConfig.imageRounding = imageRoundingSelect.value;
+      currentConfig.imageGrayscale = imageGrayscaleCheck.checked;
+      currentConfig.imageSepia = imageSepiaCheck.checked;
+      currentConfig.heroOverlayOpacity = heroOverlayOpacity.value;
+      currentConfig.customHeroImg = customHeroImgInput.value;
+      currentConfig.sectionAbout = sectionAboutCheck.checked;
+      currentConfig.sectionServices = sectionServicesCheck.checked;
+      currentConfig.sectionGallery = sectionGalleryCheck.checked;
+      currentConfig.sectionTestimonials = sectionTestimonialsCheck.checked;
+      currentConfig.sectionFaq = sectionFaqCheck.checked;
+      currentConfig.sectionStats = sectionStatsCheck.checked;
+      currentConfig.sectionContact = sectionContactCheck.checked;
+      currentConfig.contactType = contactTypeSelect.value;
+      currentConfig.contactEmail = contactEmailInput.value;
+      currentConfig.contactPhone = contactPhoneInput.value;
+      currentConfig.contactAddress = contactAddressInput.value;
+      currentConfig.footerLayout = footerLayoutSelect.value;
+
+      triggerReactivePreview();
+    }
+
+    // Attach listeners to every input control
+    const allFormControls = [
+      templateStyleSelect, layoutDensitySelect, brandNameInput, brandTaglineInput,
+      heroHeadlineInput, heroSubtextInput, heroPrimaryBtnInput, heroSecondaryBtnInput,
+      colorSchemeSelect, primaryColorPicker, accentColorPicker, bgColorPicker, surfaceColorPicker,
+      fontPairingSelect, headingScaleRange, navLayoutSelect, navCtaTextInput, heroLayoutSelect,
+      imageRoundingSelect, imageGrayscaleCheck, imageSepiaCheck, heroOverlayOpacity,
+      customHeroImgInput, sectionAboutCheck, sectionServicesCheck, sectionGalleryCheck,
+      sectionTestimonialsCheck, sectionFaqCheck, sectionStatsCheck, sectionContactCheck,
+      contactTypeSelect, contactEmailInput, contactPhoneInput, contactAddressInput,
+      footerLayoutSelect
+    ];
+
+    allFormControls.forEach(ctrl => {
+      ctrl.addEventListener('input', () => {
+        primaryColorVal.textContent = primaryColorPicker.value;
+        accentColorVal.textContent = accentColorPicker.value;
+        bgColorVal.textContent = bgColorPicker.value;
+        surfaceColorVal.textContent = surfaceColorPicker.value;
+        headingScaleVal.textContent = `Scale ${headingScaleRange.value}`;
+        heroOverlayVal.textContent = `${heroOverlayOpacity.value}%`;
+        readStateFromFormInputs();
+      });
+      ctrl.addEventListener('change', () => readStateFromFormInputs());
+    });
+
+    // Theme toggles
+    setSiteThemeDark.addEventListener('click', () => {
+      currentConfig.siteTheme = 'dark';
+      const pal = PALETTES[currentConfig.colorScheme]?.dark || PALETTES.monochrome.dark;
+      currentConfig.primaryColor = pal.primary;
+      currentConfig.accentColor = pal.accent;
+      currentConfig.bgColor = pal.bg;
+      currentConfig.surfaceColor = pal.surface;
+      syncFormFromConfig(currentConfig);
+      triggerReactivePreview();
+      showToast('Switched to Dark Tone');
+    });
+
+    setSiteThemeLight.addEventListener('click', () => {
+      currentConfig.siteTheme = 'light';
+      const pal = PALETTES[currentConfig.colorScheme]?.light || PALETTES.monochrome.light;
+      currentConfig.primaryColor = pal.primary;
+      currentConfig.accentColor = pal.accent;
+      currentConfig.bgColor = pal.bg;
+      currentConfig.surfaceColor = pal.surface;
+      syncFormFromConfig(currentConfig);
+      triggerReactivePreview();
+      showToast('Switched to Light Tone');
+    });
+
+    // Color Scheme Presets change listener
+    colorSchemeSelect.addEventListener('change', () => {
+      const scheme = colorSchemeSelect.value;
+      const group = PALETTES[scheme] || PALETTES.monochrome;
+      const pal = currentConfig.siteTheme === 'dark' ? group.dark : group.light;
+      currentConfig.colorScheme = scheme;
+      currentConfig.primaryColor = pal.primary;
+      currentConfig.accentColor = pal.accent;
+      currentConfig.bgColor = pal.bg;
+      currentConfig.surfaceColor = pal.surface;
+      syncFormFromConfig(currentConfig);
+      triggerReactivePreview();
+    });
+
+    // Industry selector change
+    industrySelect.addEventListener('change', () => {
+      applyIndustryDefaults(industrySelect.value);
+    });
+
+    applyPresetDefaultsBtn.addEventListener('click', () => {
+      applyIndustryDefaults(industrySelect.value);
+      showToast('Applied Smart Industry Defaults');
+    });
+
+    function applyIndustryDefaults(indKey) {
+      const p = INDUSTRY_PROFILES[indKey];
+      if (!p) return;
+      currentConfig.industry = indKey;
+      currentConfig.brandName = p.brandName;
+      currentConfig.brandTagline = p.brandTagline;
+      currentConfig.heroHeadline = p.heroHeadline;
+      currentConfig.heroSubtext = p.heroSubtext;
+      currentConfig.heroPrimaryBtn = p.heroPrimaryBtn;
+      currentConfig.heroSecondaryBtn = p.heroSecondaryBtn;
+      currentConfig.templateStyle = p.templateStyle;
+      currentConfig.colorScheme = p.colorScheme;
+      currentConfig.siteTheme = p.siteTheme;
+      currentConfig.fontPairing = p.fontPairing;
+      currentConfig.navLayout = p.navLayout;
+      currentConfig.heroLayout = p.heroLayout;
+      currentConfig.imageRounding = p.imageRounding;
+      currentConfig.imageGrayscale = p.imageGrayscale;
+      currentConfig.imageSepia = p.imageSepia;
+      currentConfig.heroOverlayOpacity = p.heroOverlayOpacity;
+      currentConfig.customHeroImg = "";
+      currentConfig.contactEmail = p.contactEmail;
+      currentConfig.contactPhone = p.contactPhone;
+      currentConfig.contactAddress = p.contactAddress;
+
+      const pal = PALETTES[p.colorScheme] ? (p.siteTheme === 'dark' ? PALETTES[p.colorScheme].dark : PALETTES[p.colorScheme].light) : PALETTES.monochrome.dark;
+      currentConfig.primaryColor = pal.primary;
+      currentConfig.accentColor = pal.accent;
+      currentConfig.bgColor = pal.bg;
+      currentConfig.surfaceColor = pal.surface;
+
+      syncFormFromConfig(currentConfig);
+      triggerReactivePreview();
+    }
+
+    // Viewport Resizing Buttons
+    const viewportBtns = document.querySelectorAll('.viewport-btn');
+    viewportBtns.forEach(b => {
+      b.addEventListener('click', () => {
+        viewportBtns.forEach(btn => {
+          btn.classList.remove('bg-slate-800', 'text-white');
+          btn.classList.add('text-slate-400');
+        });
+        b.classList.add('bg-slate-800', 'text-white');
+        b.classList.remove('text-slate-400');
+
+        const mode = b.dataset.view;
+        if (mode === 'desktop') {
+          previewWrapper.style.width = '100%';
+          viewportDimText.textContent = '100% (Fluid Desktop)';
+        } else if (mode === 'tablet') {
+          previewWrapper.style.width = '768px';
+          viewportDimText.textContent = '768px (Tablet Portrait)';
+        } else if (mode === 'mobile') {
+          previewWrapper.style.width = '375px';
+          viewportDimText.textContent = '375px (Mobile Portrait)';
+        }
+      });
+    });
+
+    // Randomizer
+    randomizeAllBtn.addEventListener('click', () => {
+      const indKeys = Object.keys(INDUSTRY_PROFILES);
+      const chosenInd = indKeys[Math.floor(Math.random() * indKeys.length)];
+      applyIndustryDefaults(chosenInd);
+
+      // Randomize creative parameters
+      const styles = ['minimalist_clean', 'neo_brutalist', 'elegant_editorial', 'modern_glass', 'warm_rustic', 'monochrome_noir', 'vibrant_pop'];
+      const navs = ['minimal_sticky', 'floating_pill', 'centered_logo', 'clean_action', 'dropdown_mega'];
+      const heroes = ['minimal_landing', 'split_hero', 'one_plus_three', 'asymmetric_editorial', 'card_stack', 'video_banner'];
+      const roundings = ['none', 'soft', 'large', 'squircle', 'bordered_frame'];
+
+      currentConfig.templateStyle = styles[Math.floor(Math.random() * styles.length)];
+      currentConfig.navLayout = navs[Math.floor(Math.random() * navs.length)];
+      currentConfig.heroLayout = heroes[Math.floor(Math.random() * heroes.length)];
+      currentConfig.imageRounding = roundings[Math.floor(Math.random() * roundings.length)];
+
+      syncFormFromConfig(currentConfig);
+      triggerReactivePreview();
+      showToast('Generated Random Creative Pairing!');
+    });
+
+    manualRefreshBtn.addEventListener('click', () => {
+      executePreviewCompilation();
+      showToast('Sandbox Frame Refreshed');
+    });
+
+    // Open in New Tab
+    openNewTabBtn.addEventListener('click', () => {
+      compiledHtmlCode = generateHtmlDocument(currentConfig);
+      const cleanExecutable = compiledHtmlCode.replace('<\\/script>', '</' + 'script>');
+      const tab = window.open('about:blank', '_blank');
+      if (tab) {
+        tab.document.open();
+        tab.document.write(cleanExecutable);
+        tab.document.close();
+      } else {
+        showToast('Popup blocker prevented opening tab', 'error');
+      }
+    });
+
+    // Save & Load Slots
+    saveSlotBtn.addEventListener('click', () => {
+      const slot = saveSlotSelect.value;
+      try {
+        const payload = { timestamp: new Date().toISOString(), config: currentConfig };
+        localStorage.setItem(`wf_slot_${slot}`, JSON.stringify(payload));
+        showToast(`Configuration saved to ${slot.toUpperCase()}`);
+      } catch (err) {
+        showToast('Storage full or unavailable', 'error');
+      }
+    });
+
+    loadSlotBtn.addEventListener('click', () => {
+      const slot = saveSlotSelect.value;
+      try {
+        const raw = localStorage.getItem(`wf_slot_${slot}`);
+        if (!raw) {
+          showToast(`No template found in ${slot.toUpperCase()}`, 'error');
+          return;
+        }
+        currentConfig = JSON.parse(raw).config;
+        syncFormFromConfig(currentConfig);
+        triggerReactivePreview();
+        showToast(`Loaded ${slot.toUpperCase()}`);
+      } catch (err) {
+        showToast('Failed to load slot data', 'error');
+      }
+    });
+
+    // Download Standalone .HTML
+    exportFileBtn.addEventListener('click', () => {
+      compiledHtmlCode = generateHtmlDocument(currentConfig);
+      const cleanExecutable = compiledHtmlCode.replace('<\\/script>', '</' + 'script>');
+      const blob = new Blob([cleanExecutable], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const filename = `${currentConfig.brandName.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'webforge-site'}.html`;
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported: ${filename}`);
+    });
+
+    // Copy Code
+    copyCodeBtn.addEventListener('click', () => {
+      compiledHtmlCode = generateHtmlDocument(currentConfig);
+      const cleanExecutable = compiledHtmlCode.replace('<\\/script>', '</' + 'script>');
+      const txt = document.createElement('textarea');
+      txt.value = cleanExecutable;
+      txt.style.position = 'fixed';
+      txt.style.left = '-99999px';
+      document.body.appendChild(txt);
+      txt.focus();
+      txt.select();
+      try {
+        document.execCommand('copy');
+        showToast('Standalone HTML copied to clipboard!');
+      } catch (e) {
+        showToast('Copy failed', 'error');
+      }
+      document.body.removeChild(txt);
+    });
+
+    // Modal controls
+    function dismissModal() {
+      welcomeModal.classList.add('opacity-0', 'pointer-events-none');
+      if (dontShowAgainCheck.checked) {
+        try { localStorage.setItem('wf_suppress_welcome_v3', 'true'); } catch(e) {}
+      }
+    }
+    closeWelcomeTopBtn.addEventListener('click', dismissModal);
+    launchStudioBtn.addEventListener('click', dismissModal);
+    reopenHelpBtn.addEventListener('click', () => {
+      welcomeModal.classList.remove('opacity-0', 'pointer-events-none');
+    });
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `px-4 py-2.5 rounded-xl shadow-xl text-xs font-medium border flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto ${
+        type === 'error'
+          ? 'bg-rose-950 border-rose-800 text-rose-200'
+          : 'bg-slate-900 border-indigo-500/40 text-slate-100 shadow-indigo-950/50'
+      }`;
+      const icon = type === 'error' ? '<span class="text-rose-400">✕</span>' : '<span class="text-emerald-400">✓</span>';
+      toast.innerHTML = `${icon}<span>${message}</span>`;
+      container.appendChild(toast);
+      requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    // Window Init
+    window.onload = function() {
+      try {
+        if (localStorage.getItem('wf_suppress_welcome_v3') === 'true') {
+          welcomeModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+      } catch(e) {}
+
+      syncFormFromConfig(currentConfig);
+      executePreviewCompilation();
+    };
+  </script>
+</body>
+</html>
