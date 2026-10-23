@@ -3335,5 +3335,286 @@
 <!-- ========================================== -->
 <!-- END: EspressoHub Affiliate Bottom Drawer   -->
 <!-- ========================================== -->
+  <!-- Access Gate Modal Overlay -->
+<style>
+  #accessGateModal {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background-color: rgba(0, 0, 0, 0.94);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .gate-panel {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 16px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    box-sizing: border-box;
+    box-shadow: 0 0 32px rgba(255, 255, 255, 0.12);
+  }
+
+  .gate-scroll-body {
+    overflow-y: auto;
+    padding-right: 8px;
+    margin-bottom: 20px;
+  }
+
+  .gate-scroll-body::-webkit-scrollbar {
+    width: 5px;
+  }
+  .gate-scroll-body::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 4px;
+  }
+
+  .gate-title {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 0 0 8px 0;
+    color: #ffffff;
+  }
+
+  .gate-lead {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #cccccc;
+    margin: 0 0 18px 0;
+  }
+
+  .gate-box {
+    border: 1px solid #333333;
+    background: #0a0a0a;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #d4d4d4;
+  }
+
+  .gate-box h4 {
+    margin: 0 0 6px 0;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+  }
+
+  .gate-box p {
+    margin: 0 0 8px 0;
+  }
+  .gate-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gate-form-group {
+    margin-top: 10px;
+  }
+
+  .gate-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    color: #ffffff;
+  }
+
+  .gate-input {
+    width: 100%;
+    background-color: #000000;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-family: monospace;
+    border-radius: 8px;
+    box-sizing: border-box;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .gate-input:focus {
+    box-shadow: 0 0 0 2px #ffffff;
+  }
+
+  .gate-checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 18px 0 14px 0;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .gate-checkbox-container input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    background-color: #000000;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .gate-checkbox-container input[type="checkbox"]:checked::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+  }
+
+  .gate-checkbox-text {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ffffff;
+  }
+
+  .gate-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .gate-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .gate-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .gate-error {
+    color: #ff6b6b;
+    font-size: 11px;
+    margin-top: 6px;
+    min-height: 16px;
+  }
+</style>
+
+<div id="accessGateModal" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-panel">
+    <div class="gate-scroll-body">
+      <h2 id="gateTitle" class="gate-title">Welcome & Authorization</h2>
+      <p class="gate-lead">Thank you for your custom. Please review our licensing terms, accept the agreement, and enter your authorization promo code to enter the application.</p>
+
+      <!-- Disclaimer -->
+      <div class="gate-box">
+        <h4>Service Disclaimer</h4>
+        <p>While every attempt has been made to provide you with this application, results are not guaranteed. The tool is provided on an "as is" and "as available" basis without warranties of any kind.</p>
+      </div>
+
+      <!-- User Licence Agreement -->
+      <div class="gate-box">
+        <h4>User Licence Agreement & Ownership</h4>
+        <p>The user retains <strong>100% full ownership</strong> of any static HTML produced with this application. You are granted complete freedom to edit, copy, on-sell, or deploy the generated code for any legitimate commercial or personal purpose.</p>
+        <p>Once the code has been downloaded or altered, it is deemed the user's sole independent work. Consequently, the user assumes full responsibility and liability regarding how that content and code are published, distributed, or operated.</p>
+        <p>The original developer of this template generator assumes <strong>no liability or responsibility</strong> for any output, modified code, or subsequent deployment once files have been generated or downloaded.</p>
+      </div>
+
+      <!-- Inputs -->
+      <div class="gate-form-group">
+        <label for="gatePromoCode" class="gate-label">Promo Code</label>
+        <input type="text" id="gatePromoCode" class="gate-input" placeholder="Enter code..." autocomplete="off" spellcheck="false">
+        <div id="gateError" class="gate-error"></div>
+      </div>
+
+      <!-- Acceptance Checkbox -->
+      <label class="gate-checkbox-container">
+        <input type="checkbox" id="gateAcceptCheckbox">
+        <span class="gate-checkbox-text">I accept and understand the licence agreement and terms of use.</span>
+      </label>
+    </div>
+
+    <button id="gateSubmitBtn" class="gate-btn" onclick="validateAccessGate()">Continue to App</button>
+  </div>
+</div>
+
+<script>
+  (function initAccessGate() {
+    const REQUIRED_CODE = "WEBSTYLIST12";
+    const STORAGE_KEY = "app_access_verified_v1";
+
+    const modal = document.getElementById("accessGateModal");
+    const codeInput = document.getElementById("gatePromoCode");
+    const checkbox = document.getElementById("gateAcceptCheckbox");
+    const errorEl = document.getElementById("gateError");
+
+    // Check if already authorized in current browser session
+    if (localStorage.getItem(STORAGE_KEY) === "true") {
+      modal.style.display = "none";
+      return;
+    }
+
+    // Freeze page scrolling while locked
+    document.body.style.overflow = "hidden";
+
+    window.validateAccessGate = function() {
+      const codeVal = (codeInput.value || "").trim().toUpperCase();
+      const isAccepted = checkbox.checked;
+
+      errorEl.textContent = "";
+
+      if (!isAccepted) {
+        errorEl.textContent = "Please tick the checkbox to accept the agreement.";
+        return;
+      }
+
+      if (codeVal !== REQUIRED_CODE) {
+        errorEl.textContent = "Invalid promo code. Please check your credentials.";
+        codeInput.focus();
+        return;
+      }
+
+      // Success: Save flag and unlock
+      try {
+        localStorage.setItem(STORAGE_KEY, "true");
+      } catch (e) {
+        // Fallback if local storage is restricted
+      }
+
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    };
+
+    // Allow Enter key submission from the input field
+    codeInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        validateAccessGate();
+      }
+    });
+  })();
+</script>
 </body>
 </html>
